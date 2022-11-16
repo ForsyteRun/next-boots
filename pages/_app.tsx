@@ -1,32 +1,45 @@
-import "../styles/globals.scss";
+import {
+  Box,
+  Container,
+  createTheme,
+  CssBaseline,
+  ThemeOptions,
+  ThemeProvider,
+} from "@mui/material";
 import type { AppProps } from "next/app";
+import Head from "next/head";
 import Layout from "../components/Layout";
-import { Box, Container,CssBaseline, ThemeProvider } from "@mui/material";
-import { createTheme } from "@mui/system";
-declare module '@mui/material/styles' {
+import "../styles/globals.scss";
+import s from "./../styles/App.module.scss";
+import { Inter } from "@next/font/google";
+
+const inter = Inter();
+declare module "@mui/material/styles" {
   interface Theme {
     breakpoints: {
       values: {
-        xs: number
-        sm: number
-        md: number
-        lg: number
-        xl: number    
-     }
-   }
+        xs: number;
+        sm: number;
+        md: number;
+        lg: number;
+        xl: number;
+      };
+    };
   }
-   interface ThemeOptions {
+  interface ThemeOptions {
     breakpoints?: {
       values?: {
-        xs: number
-        sm: number
-        md: number
-        lg: number
-        xl: number    
-      }
-    }
+        xs: number;
+        sm: number;
+        md: number;
+        lg: number;
+        xl: number;
+      };
+    };
   }
-};
+}
+
+interface IThemeOptions extends ThemeOptions {}
 
 const theme = createTheme({
   breakpoints: {
@@ -34,28 +47,33 @@ const theme = createTheme({
       xs: 0,
       sm: 600,
       md: 900,
-      lg: 1080,
-      xl: 1500
-    }, 
+      lg: 1128,
+      xl: 1500,
+    },
   },
-});
+  typography: {
+    fontFamily: [].join(","),
+  },
+} as IThemeOptions);
+
+// theme = responsiveFontSizes(theme)
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
-    <>
-      <CssBaseline />
+    <div className={inter.className}>
       <ThemeProvider theme={theme}>
-      <Container maxWidth='lg'>
-        <Box sx={{ bgcolor: "#ffff", height: "100vh" }}>
-          <Layout>
-            <main>
-              <Component {...pageProps} />
-            </main>
-          </Layout>
-        </Box>
-      </Container>         
+        <CssBaseline />
+        <Container maxWidth="lg">
+          <Box className={s.wrapper}>
+            <Layout>
+              <main>
+                <Component {...pageProps} />
+              </main>
+            </Layout>
+          </Box>
+        </Container>
       </ThemeProvider>
-    </>
+    </div>
   );
 };
 
