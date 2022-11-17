@@ -7,7 +7,6 @@ import {
   ThemeProvider,
 } from "@mui/material";
 import type { AppProps } from "next/app";
-import Head from "next/head";
 import Layout from "../components/Layout";
 import "../styles/globals.scss";
 import s from "./../styles/App.module.scss";
@@ -76,9 +75,7 @@ const App = ({ Component, pageProps }: AppProps) => {
         <Container maxWidth="lg" className={inter.className}>
           <Box className={s.wrapper}>
             <Layout>
-              <main>
                 <Component {...pageProps} />
-              </main>
             </Layout>
           </Box>
         </Container>
