@@ -11,16 +11,18 @@ const Header: FC = () => {
   return (
    <header>
     <Stack direction={"row"}>
-      <Image src={logo} alt='logo'></Image>
+      <Image src={logo} alt='logo' />
       <Stack className={s.headerCenter}>
-        <h3>REACT SNEAKERS</h3>
-        <div>Магазин лучших кроссовок</div>
+        <h3 className={s.title}>REACT SNEAKERS</h3>
+        <div className={s.subTitle}>Магазин лучших кроссовок</div>
       </Stack>
-      <Stack direction={"row"}>
-        <ShoppingCartOutlinedIcon/>
-        <span>1205uah</span>
-        <FavoriteBorderOutlinedIcon/>
-        <AccountCircleOutlinedIcon/>
+      <Stack direction={"row"} justifyContent={'space-between'} width='196px'>
+        <Stack direction={"row"}>
+          <ShoppingCartOutlinedIcon color="primary"/>
+          <span>1205uah</span>          
+        </Stack>
+        <FavoriteBorderOutlinedIcon color="primary"/>
+        <AccountCircleOutlinedIcon color="primary"/>
       </Stack>
     </Stack>
    </header>

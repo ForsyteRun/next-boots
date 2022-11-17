@@ -53,6 +53,17 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: [].join(","),
+  }, 
+  palette: {
+    primary: {
+      main: '#9D9D9D',
+    },
+    secondary: {
+      light: '#ff7961',
+      main: '#f44336',
+      dark: '#ba000d',
+      contrastText: '#000',
+    },
   },
 } as IThemeOptions);
 
@@ -60,10 +71,9 @@ const theme = createTheme({
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
-    <div className={inter.className}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Container maxWidth="lg">
+        <Container maxWidth="lg" className={inter.className}>
           <Box className={s.wrapper}>
             <Layout>
               <main>
@@ -72,8 +82,7 @@ const App = ({ Component, pageProps }: AppProps) => {
             </Layout>
           </Box>
         </Container>
-      </ThemeProvider>
-    </div>
+    </ThemeProvider>
   );
 };
 
