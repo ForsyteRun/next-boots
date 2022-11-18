@@ -15,7 +15,7 @@ type PropsType = {
 
 const CardItem: FC<PropsType> = ({ card }) => {
   return (
-    <Card className={s.conteiner}>
+    <Card className={s.conteiner} sx={{':hover': {transform: 'translateY(-0.5px)', boxShadow: '7px 7px 15px #999'}}}>
       <CardContent className={s.content}>
       <Image
             className={s.like}

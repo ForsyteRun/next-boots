@@ -1,19 +1,15 @@
-import { FC, ReactNode } from "react"
-import Footer from "./Footer"
-import Header from "./Header"
+import React, { FC, ReactNode } from "react";
 
 type Props = {
-   children: ReactNode
+  children: ReactNode;
 };
 
-const Layout: FC<Props> = ({children}: Props) => {
+const Layout: FC<Props> = ({ children }: Props) => {
   return (
    <>
-      <Header/>
-         {children}
-      <Footer/>
+      {children}
    </>
-   )
-}
+  )
+};
 
-export default Layout
+export default Layout;
