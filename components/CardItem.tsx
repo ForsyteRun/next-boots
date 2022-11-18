@@ -1,37 +1,35 @@
-import { FC } from "react"
-import { CardType } from "../types/types"
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import { FC } from "react";
+import { CardType } from "../types/types";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Button from "@mui/material/Button";
+import Image from "next/image";
+import s from "./../styles/CardItem.module.scss";
+import like from "public/card/like.svg";
+import add from "public/card/add.svg";
 
 type PropsType = {
-  card: CardType
-}
+  card: CardType;
+};
 
-const bull = (
-  <Box
-    component="span"
-    sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
-  >
-    •
-  </Box>
-);
-
-const CardItem: FC<PropsType> = ({card}) => {
+const CardItem: FC<PropsType> = ({ card }) => {
   return (
-    <Card sx={{ minWidth: 20 }}>
-      <CardContent>
-        
+    <Card className={s.conteiner}>
+      <CardContent className={s.content}>
+      <Image
+            className={s.like}
+            src={like}
+            alt="like"
+          />
+        <Image src={card.img} width={133} height={114} alt="card" />
+        <h4 className={s.title}>{card.title}</h4>
+        <div className={s.titlePrice}>цена</div>
+        <p className={s.price}>{card.price} uah</p>
+        <Image className={s.add} src={add} alt="add" />
       </CardContent>
-      <CardActions>
-        <Button size="small">Learn More</Button>
-      </CardActions>
     </Card>
   );
-}
+};
 
 export default CardItem;

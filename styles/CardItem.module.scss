@@ -1,0 +1,53 @@
+$textBlack: #000;
+$textGray: #9D9D9D;
+$textLineHeight: 1.21;
+$textPrice: #5C5C5C;
+$border: #EAEAEA;
+
+.title {
+   font-weight: 600;
+   font-size: 14px;
+   color: $textBlack;
+   line-height: $textLineHeight;
+}
+
+.price {
+   font-weight: 700;
+   color: $textBlack;
+   line-height: $textLineHeight;
+}
+
+.titlePrice {
+   font-size: 11px;
+   font-weight: 500;
+   line-height: $textLineHeight;
+   text-transform: uppercase;
+   color: #9D9D9D;
+}
+
+.conteiner {
+   max-width: 210px;
+   height: 260px;
+   border-radius: 40px;
+   .content {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+      width: 100%;
+      position: relative;
+      padding: 30px;
+      .like {
+         width: 32px;
+         position: absolute;
+         left: 15%;
+         top: 15%;
+      }
+      .add {
+         width: 32px;
+         position: absolute;
+         left: 68%;
+         top: 78%;
+      }
+   }
+}
