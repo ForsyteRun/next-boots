@@ -13,7 +13,7 @@ type PropsType = {
   card: CardType;
 };
 
-const CardItem: FC<PropsType> = ({ card }) => {
+const CardItem: FC<PropsType> = ({ card }) => {//todo: 1.add classNames; 2.Убрать card из повтора
   return (
     <Card className={s.conteiner} sx={{':hover': {transform: 'translateY(-0.5px)', boxShadow: '7px 7px 15px #999'}}}>
       <CardContent className={s.content}>

@@ -5,7 +5,7 @@ import { cards } from "../public/card/data";
 import { CardType } from "../types/types";
 import s from "./../styles/Main.module.scss";
 
-const Main = () => {
+const Main = () => {//todo: поделать компоненты и классы
   return (
     <main className={s.conteiner}>
       <Stack direction="row" justifyContent="space-between" mb="30px">
