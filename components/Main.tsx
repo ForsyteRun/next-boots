@@ -14,7 +14,7 @@ const Main = () => {//todo: поделать компоненты и класс�
       </Stack>
       <Stack direction="row" justifyContent="space-between" gap="10px">
         {cards.map((card: CardType) => {
-          return <CardItem card={card} key={card.id} />;
+          return <CardItem {...card} key={card.id} />;
         })}
       </Stack>
     </main>

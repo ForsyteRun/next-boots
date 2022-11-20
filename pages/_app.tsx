@@ -68,7 +68,7 @@ const theme = createTheme({
 
 // theme = responsiveFontSizes(theme)
 
-const App = ({ Component, pageProps }: AppProps) => {
+const App = ({ Component, pageProps }: AppProps) => {//todo: responsiveFontSizes mui
   return (
       <ThemeProvider theme={theme}>
         <CssBaseline />
