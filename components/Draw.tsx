@@ -5,9 +5,10 @@ import * as React from "react";
 type PropsType = {
   shop: boolean;
   setShop: (el: boolean) => void;
+  item: any
 };
 
-const Draw: React.FC<PropsType> = ({ shop, setShop }) => {//todo: - toggleDrawer in ternar operator; - div after return; - memo
+const Draw: React.FC<PropsType> = ({ shop, setShop, item }) => {//todo: - toggleDrawer in ternar operator; - div after return; - memo
 
   const toggleDrawer = (ancor: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
       if (
@@ -21,12 +22,6 @@ const Draw: React.FC<PropsType> = ({ shop, setShop }) => {//todo: - toggleDrawer
       setShop(ancor);
     };
 
-  const list = () => (
-    <Box sx={{ width: 500, p: 2}} role="presentation">
-      <h2>Корзина</h2>
-    </Box>
-  );
-
   return (
     <div >
       {(["right"] as const).map((anchor) => (
@@ -38,7 +33,10 @@ const Draw: React.FC<PropsType> = ({ shop, setShop }) => {//todo: - toggleDrawer
               onOpen={toggleDrawer(true)}
               transitionDuration={500}
             >
-              {list()}
+              <Box sx={{ width: 500, p: 2}} role="presentation">
+                <h2>Корзина</h2>
+                {item && item.map((el: any) => <p key={el.id}>{el.title}</p> )}
+              </Box>
             </SwipeableDrawer>
         </div>
       ))}

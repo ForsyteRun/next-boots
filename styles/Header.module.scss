@@ -7,21 +7,20 @@ $border: #EAEAEA;
 .conteiner {
    padding: 46px;
    border-bottom: 1px solid $border;
-}
-
-.headerCenter {
-   flex-grow: 1;
-   margin-left: 16px;
-   .title {
-      font-weight: 700;
-      font-size: 20px;
-      line-height: $textLineHeight;
-      color: $textBlack;
-   }
-   .subTitle {
-      font-size: 14px;
-      line-height: 1.5;
-      color: $textGray;
+   .headerCenter {
+      flex-grow: 1;
+      margin-left: 16px;
+      .title {
+         font-weight: 700;
+         font-size: 20px;
+         line-height: $textLineHeight;
+         color: $textBlack;
+      }
+      .subTitle {
+         font-size: 14px;
+         line-height: 1.5;
+         color: $textGray;
+      }
    }
 }
 

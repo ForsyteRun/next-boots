@@ -1,8 +1,10 @@
-import { FC } from "react"
+import { FC, useState } from "react"
 
 const Footer: FC = () => {
+   
   return (
    <footer>
+
       Footer
    </footer>
   )

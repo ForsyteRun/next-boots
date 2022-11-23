@@ -72,7 +72,7 @@ const App = ({ Component, pageProps }: AppProps) => {//todo: responsiveFontSizes
   return (
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Container maxWidth="lg" className={inter.className}>
+        <Container maxWidth="lg" sx={{height: '100%'}} className={inter.className}>
           <Box className={s.wrapper}>
             <Layout>
                 <Component {...pageProps} />

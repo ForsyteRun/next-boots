@@ -8,7 +8,11 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 import s from './../styles/Header.module.scss'
 import Draw from "./Draw";
 
-const Header: FC = () => {//todo: 1.Stack to components; 2.memo; 3.add classNames to Stack
+type PropsType = {
+  item: any
+}
+
+const Header: FC<PropsType> = ({item}) => {//todo: 1.Stack to components; 2.memo; 3.add classNames to Stack
   const [shop, setShop] = useState<boolean>(false)
 
   //appear modal window drawer right side
@@ -16,7 +20,7 @@ const Header: FC = () => {//todo: 1.Stack to components; 2.memo; 3.add className
     setShop(!shop)
 }
 
-  return (
+  return ( 
    <header>
     <Stack direction={"row"} className={s.conteiner}>
       <Image src={logo} alt='logo' />
@@ -35,7 +39,7 @@ const Header: FC = () => {//todo: 1.Stack to components; 2.memo; 3.add className
         <AccountCircleOutlinedIcon color="primary"/>
       </Stack>
     </Stack>
-    <Draw setShop={setShop} shop={shop}/>
+    <Draw setShop={setShop} shop={shop} item={item}/>
    </header>
   )
 }
