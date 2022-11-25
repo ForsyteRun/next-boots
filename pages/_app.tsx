@@ -12,7 +12,7 @@ import "../styles/globals.scss";
 import s from "./../styles/App.module.scss";
 import { Inter } from "@next/font/google";
 
-const inter = Inter();
+const inter = Inter({ subsets: ['latin'] });
 declare module "@mui/material/styles" {
   interface Theme {
     breakpoints: {

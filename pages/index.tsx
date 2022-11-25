@@ -1,23 +1,21 @@
 import { NextPage } from "next";
 import Head from "next/head";
 import React, { useState } from "react";
-import { FC } from "react";
-import Draw from "../components/Draw";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Main from "../components/Main";
-import { CardType, ShortCardType } from "../types/types";
+import { CardType } from "../types/types";
 
 type PropsType = {
-  data?: Array<CardType>
+  data: Array<CardType>
 }
 
 const Home: NextPage<PropsType> = (data) => {
   const [item, setItem] = useState<Array<CardType>>([])
 
-  const addToDrawer = (obj: any) => {
-    item.find((el: any) => el.id === obj.id) 
-    ? setItem(item.filter((el: any) => el.id !== obj.id)) 
+  const addToDrawer = (obj: CardType) => {
+    item.find((el: CardType) => el.id === obj.id) 
+    ? setItem(item.filter((el: CardType) => el.id !== obj.id)) 
     : setItem(prev => [...prev, obj])
   }
 

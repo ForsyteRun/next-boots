@@ -1,26 +1,36 @@
 import Box from "@mui/material/Box";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-import * as React from "react";
+import { FC, KeyboardEvent, MouseEvent } from "react";
+import { CardType } from "../types/types";
+import DrawItem from "./DrawItem";
+import s from './../styles/Draw.module.scss'
+import ButtonGreen from "./ButtonGreen";
+import { Stack } from "@mui/material";
+import Image from "next/image";
+import EmptyDrawer from "./EmptyDrawer";
+import classNames from "classnames";
 
 type PropsType = {
   shop: boolean;
   setShop: (el: boolean) => void;
-  item: any
+  item: Array<CardType>
 };
 
-const Draw: React.FC<PropsType> = ({ shop, setShop, item }) => {//todo: - toggleDrawer in ternar operator; - div after return; - memo
+const Draw: FC<PropsType> = ({ shop, setShop, item }) => {//todo: - toggleDrawer in ternar operator; - div after return; - memo
 
-  const toggleDrawer = (ancor: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+  const toggleDrawer = (ancor: boolean) => (event: KeyboardEvent | MouseEvent) => {
       if (
         event &&
         event.type === "keydown" &&
-        ((event as React.KeyboardEvent).key === "Tab" ||
-          (event as React.KeyboardEvent).key === "Shift")
+        ((event as KeyboardEvent).key === "Tab" ||
+          (event as KeyboardEvent).key === "Shift")
       ) {
         return;
       }
       setShop(ancor);
     };
+
+    const itemData = item.length > 0;
 
   return (
     <div >
@@ -33,10 +43,16 @@ const Draw: React.FC<PropsType> = ({ shop, setShop, item }) => {//todo: - toggle
               onOpen={toggleDrawer(true)}
               transitionDuration={500}
             >
-              <Box sx={{ width: 500, p: 2}} role="presentation">
-                <h2>Корзина</h2>
-                {item && item.map((el: any) => <p key={el.id}>{el.title}</p> )}
-              </Box>
+              <Stack className={classNames(s.content, s.contentEmpty: !itemData)} role="presentation" direction='column'>
+                <h2 className={s.title}>Корзина</h2>
+                <Box className={itemData ? s.itemTrue : s.itemFalse}>
+                  {itemData 
+                  ? item.map((el: CardType) => <DrawItem {...el} key={el.id}/>) 
+                  : <EmptyDrawer/>
+                  }
+                </Box>
+                 {itemData ? <ButtonGreen/> : <span>1</span>}
+              </Stack>
             </SwipeableDrawer>
         </div>
       ))}

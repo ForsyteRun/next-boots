@@ -7,8 +7,8 @@ import s from "./../styles/Main.module.scss";
 import { NextPage } from 'next'
 
 type PropsType = {
-  data?: Array<CardType>
-  addToDrawer: (el: any) => void
+  data: Array<CardType>
+  addToDrawer: (el: CardType) => void
 }
 
 const Main: FC<PropsType> = ({data, addToDrawer}) => {//todo: поделать компоненты и классы

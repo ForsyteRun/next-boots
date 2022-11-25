@@ -10,7 +10,7 @@ import add from "public/card/add.svg";
 import notAdd from "public/card/notAdd.svg";
 
 type PropsType = {
-  addToDrawer: (el: any) => void
+  addToDrawer: (el: CardType) => void
   card: CardType
 }
 
@@ -23,11 +23,13 @@ const CardItem: FC<PropsType> = ({card, addToDrawer}) => {//todo: 1.add classNam
     addToDrawer(card)
     setTakeCard(!takeCard)
   }
+
+
   return (
     <Card className={s.conteiner} sx={{':hover': {transform: 'translateY(-0.5px)', boxShadow: '7px 7px 15px #999'}}}>
       <CardContent className={s.content}>
       <Image  onClick={()=>setFavorite(!favorite)} className={s.like} src={favorite ? like : unLike} alt="like" />
-        <Image src={card.img} width={133} height={114} alt="card" />
+        <Image src= {card.img} width={133} height={114} alt="card" />
         <p className={s.title}>{card.title}</p>
         <div className={s.titlePrice}>цена</div>
         <p className={s.price}>{card.price} uah</p>

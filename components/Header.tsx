@@ -7,9 +7,10 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import s from './../styles/Header.module.scss'
 import Draw from "./Draw";
+import { CardType } from "../types/types";
 
 type PropsType = {
-  item: any
+  item: Array<CardType>
 }
 
 const Header: FC<PropsType> = ({item}) => {//todo: 1.Stack to components; 2.memo; 3.add classNames to Stack
