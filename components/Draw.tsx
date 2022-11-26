@@ -4,11 +4,11 @@ import { FC, KeyboardEvent, MouseEvent } from "react";
 import { CardType } from "../types/types";
 import DrawItem from "./DrawItem";
 import s from './../styles/Draw.module.scss'
-import ButtonGreen from "./ButtonGreen";
 import { Stack } from "@mui/material";
 import Image from "next/image";
 import EmptyDrawer from "./EmptyDrawer";
 import classNames from "classnames";
+import DrawerFooter from "./DrawerFooter";
 
 type PropsType = {
   shop: boolean;
@@ -43,7 +43,7 @@ const Draw: FC<PropsType> = ({ shop, setShop, item }) => {//todo: - toggleDrawer
               onOpen={toggleDrawer(true)}
               transitionDuration={500}
             >
-              <Stack className={classNames(s.content, s.contentEmpty: !itemData)} role="presentation" direction='column'>
+              <Stack className={classNames(s.content, {[s.contentEmpty]: !itemData})} role="presentation" direction='column'>
                 <h2 className={s.title}>Корзина</h2>
                 <Box className={itemData ? s.itemTrue : s.itemFalse}>
                   {itemData 
@@ -51,7 +51,7 @@ const Draw: FC<PropsType> = ({ shop, setShop, item }) => {//todo: - toggleDrawer
                   : <EmptyDrawer/>
                   }
                 </Box>
-                 {itemData ? <ButtonGreen/> : <span>1</span>}
+                 {itemData ? <DrawerFooter/> : <span style={{opacity: 0}}>1</span>}
               </Stack>
             </SwipeableDrawer>
         </div>

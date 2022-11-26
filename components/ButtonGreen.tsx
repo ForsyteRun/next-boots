@@ -9,7 +9,7 @@ const ButtonGreen: FC = () => {
       <button className={s.btn}>
         <Stack direction='row' justifyContent='center'>
           <span style={{alignSelf: 'center'}}>Оформить заказ</span>
-          <ArrowRightAltIcon sx={{color: '#ffffff'}}/>
+          <ArrowRightAltIcon className={s.arrow}/>
         </Stack>
       </button>
     </>
