@@ -1,58 +1,14 @@
-[
- {
-  "title": "Мужские Кроссовки Nike Air Max 270",
-  "price": "680.00",
-  "like": false,
-  "img": "/card/image 1.jpg",
-  "id": "1"
- },
- {
-  "title": "Мужские Кроссовки Nike Air Max 270",
-  "price": "201.00",
-  "like": false,
-  "img": "/card/image 2.jpg",
-  "id": "2"
- },
- {
-  "title": "Мужские Кроссовки Nike Air Max 270",
-  "price": "341.00",
-  "like": false,
-  "img": "/card/image 3.jpg",
-  "id": "3"
- },
- {
-  "title": "Мужские Кроссовки Nike Air Max 270",
-  "price": "416.00",
-  "like": false,
-  "img": "/card/image 4.jpg",
-  "id": "4"
- },
- {
-  "title": "Мужские Кроссовки Nike Air Max 270",
-  "price": "515.00",
-  "like": false,
-  "img": "/card/image 1.jpg",
-  "id": "5"
- },
- {
-  "title": "Adelle",
-  "price": "186.00",
-  "like": false,
-  "img": "/card/image 2.jpg",
-  "id": "6"
- },
- {
-  "title": "Adelia",
-  "price": "687.00",
-  "like": false,
-  "img": "/card/image 3.jpg",
-  "id": "7"
- },
- {
-  "title": "Shane",
-  "price": "365.00",
-  "like": false,
-  "img": "/card/image 4.jpg",
-  "id": "8"
- }
-]
+{
+  "Post": {
+    "title": { "string": {} },
+    "comments": {
+      "hasMany": "Comment"
+    }
+  },
+  "Comment": {
+    "body": { "string": {} },
+    "post": {
+      "belongsTo": "Post"
+    }
+  }
+}
