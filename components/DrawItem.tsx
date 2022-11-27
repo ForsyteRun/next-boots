@@ -7,6 +7,7 @@ import s from "./../styles/DrawItem.module.scss";
 import ClearIcon from "@mui/icons-material/Clear";
 
 const DrawItem: FC<CardType> = ({ img, title, price }) => {
+
   return (
     <Card className={s.conteiner} >
       <CardContent className={s.content}>
@@ -18,6 +19,7 @@ const DrawItem: FC<CardType> = ({ img, title, price }) => {
         <ClearIcon />
       </CardContent>
     </Card>
+
   );
 };
 

@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 import s from "./../styles/DrawerFooter.module.scss";
-import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import { Stack } from "@mui/material";
 import ButtonGreen from "./ButtonGreen";
 
@@ -15,7 +14,7 @@ const DrawerFooter: FC = () => {
       <Stack  direction='row'  sx={{marginBottom: '15px'}}>
         <span>Налог 5%:</span>
         <div className={s.doted}></div>
-        <span>0 uah</span>
+        <span> uah</span>
       </Stack>
       <ButtonGreen/>
     </div>

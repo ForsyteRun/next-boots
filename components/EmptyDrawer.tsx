@@ -2,6 +2,7 @@ import { Stack } from "@mui/material"
 import Image from "next/image"
 import s from './../styles/EmptyDrawer.module.scss'
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+import DrawerFooter from "./DrawerFooter";
 
 const EmptyDrawer = () => {
   return (
@@ -15,7 +16,6 @@ const EmptyDrawer = () => {
           <span style={{alignSelf: 'center'}}>Вернуться назад</span>
         </Stack>
       </button>
-    
     </Stack>
   )
 }

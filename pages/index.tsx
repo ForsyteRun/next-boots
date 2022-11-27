@@ -12,11 +12,30 @@ type PropsType = {
 
 const Home: NextPage<PropsType> = (data) => {
   const [item, setItem] = useState<Array<CardType>>([])
+  
+  const fetchAddCard = async (obj: CardType) => {
+    const res = await fetch('https://630f1ba6498924524a860c3f.mockapi.io/draw', {
+      method: 'POST',
+      body: JSON.stringify(obj),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    res.status < 300 && setItem(prev => [...prev, obj])
+  }
 
+  const fetchDeleteCard = async (obj: CardType) => {
+    const res = await fetch(`https://630f1ba6498924524a860c3f.mockapi.io/draw/${obj.id}`, {
+      method: 'DELETE',
+    })
+    res.status < 300 && setItem(item.filter((el: CardType) => el.id !== obj.id)) 
+  }
+  
+  
   const addToDrawer = (obj: CardType) => {
     item.find((el: CardType) => el.id === obj.id) 
-    ? setItem(item.filter((el: CardType) => el.id !== obj.id)) 
-    : setItem(prev => [...prev, obj])
+    ? fetchDeleteCard(obj)
+    : fetchAddCard(obj)
   }
 
   return (

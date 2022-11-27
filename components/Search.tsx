@@ -1,27 +1,36 @@
 import { IconButton, InputAdornment, TextField } from '@mui/material';
-import { Form, Formik, FormikHelpers } from 'formik';
+import { Form, Formik } from 'formik';
 import SearchIcon from '@mui/icons-material/Search';
+import ClearIcon from '@mui/icons-material/Clear';
+import { FC } from 'react';
 
-type InitialType = {
+export type InitialType = {
   search: string
 }
 
-const submit = (values: InitialType, formikHelpers: FormikHelpers<InitialType>) => {
-  console.log(values)
-  formikHelpers.resetForm()
+type PropsType = {
+  setSearchValue: (el: InitialType | null) => void
 }
 
-const Search = () => {
+const Search: FC<PropsType> = ({setSearchValue}) => {
+  
+  const submit = (values: InitialType) => {
+    setSearchValue(values)
+  }
+
+  const clearInput = (handleReset: () => void) => {
+    setSearchValue(null)
+    handleReset()
+  }
+
   return (
    <div>
      <Formik
        initialValues={{search: ''} as InitialType}
-       onSubmit={(values, formikHelpers) => {
-         submit(values, formikHelpers)
-       }}
+       onSubmit={(values) => submit(values)}
        enableReinitialize={true}
      >
-       {({values, handleChange}) => (
+       {({values, handleChange, handleReset}) => (
          <Form >
            <TextField
              onChange={handleChange}
@@ -36,8 +45,9 @@ const Search = () => {
                 <IconButton
                   aria-label="toggle password visibility"
                   edge="end"
+                  onClick={()=>clearInput(handleReset)}
                 >
-                  <SearchIcon/>
+                  {values.search ? <ClearIcon /> : <SearchIcon/> }
                 </IconButton>
               </InputAdornment>  
               )

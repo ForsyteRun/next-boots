@@ -1,4 +1,4 @@
-import { Stack } from "@mui/material"
+import { Badge, Stack } from "@mui/material"
 import Image from "next/image"
 import { FC, useState} from "react"
 import logo from './../public/logo.png'
@@ -32,9 +32,11 @@ const Header: FC<PropsType> = ({item}) => {//todo: 1.Stack to components; 2.memo
       <Stack direction={"row"} justifyContent={'space-between'} width='196px'>
         <Stack width='95px' className={s.shop}>
           <div onClick={drawerToogle} >
+          <Badge badgeContent={item.length} color="error">
             <ShoppingCartOutlinedIcon color="primary" sx={{cursor: 'pointer'}}/>  
+          </Badge>
           </div>
-          <span>1205uah</span>          
+          <span style={{marginLeft: '15px'}}>1205uah</span>          
         </Stack>
         <FavoriteBorderOutlinedIcon color="primary"/>
         <AccountCircleOutlinedIcon color="primary"/>

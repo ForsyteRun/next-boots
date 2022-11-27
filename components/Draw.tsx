@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-import { FC, KeyboardEvent, MouseEvent } from "react";
+import { FC, KeyboardEvent, MouseEvent, useState } from "react";
 import { CardType } from "../types/types";
 import DrawItem from "./DrawItem";
 import s from './../styles/Draw.module.scss'
@@ -17,7 +17,7 @@ type PropsType = {
 };
 
 const Draw: FC<PropsType> = ({ shop, setShop, item }) => {//todo: - toggleDrawer in ternar operator; - div after return; - memo
-
+  
   const toggleDrawer = (ancor: boolean) => (event: KeyboardEvent | MouseEvent) => {
       if (
         event &&
@@ -47,11 +47,13 @@ const Draw: FC<PropsType> = ({ shop, setShop, item }) => {//todo: - toggleDrawer
                 <h2 className={s.title}>Корзина</h2>
                 <Box className={itemData ? s.itemTrue : s.itemFalse}>
                   {itemData 
-                  ? item.map((el: CardType) => <DrawItem {...el} key={el.id}/>) 
+                  ? item.map((el: CardType) => <DrawItem {...el} key={el.id} />) 
                   : <EmptyDrawer/>
                   }
                 </Box>
-                 {itemData ? <DrawerFooter/> : <span style={{opacity: 0}}>1</span>}
+                 {itemData 
+                 ? <DrawerFooter />
+                 : <span style={{opacity: 0}}>1</span>}
               </Stack>
             </SwipeableDrawer>
         </div>
