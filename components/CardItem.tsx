@@ -1,5 +1,5 @@
-import { FC, useState } from "react";
-import { CardType, ShortCardType } from "../types/types";
+import { FC, useEffect, useState } from "react";
+import { CardType } from "../types/types";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Image from "next/image";
@@ -10,20 +10,25 @@ import add from "public/card/add.svg";
 import notAdd from "public/card/notAdd.svg";
 
 type PropsType = {
-  addToDrawer: (el: CardType) => void
+  drawData: Array<CardType>
   card: CardType
+  onAddToDrawer: (el: CardType) => void
 }
 
-const CardItem: FC<PropsType> = ({card, addToDrawer}) => {//todo: 1.add classNames;
+const CardItem: FC<PropsType> = ({card, onAddToDrawer, drawData}) => {//todo: 1.add classNames;
   
   const [favorite, setFavorite] = useState<boolean>(false)
   const [takeCard, setTakeCard] = useState<boolean>(false)
+  
+  // useEffect(() => {
+  //  console.log(drawData);
+  //   // drawData.length > 0 ? setTakeCard(true) : null
+  // }, [])
 
   const addCard = () => {
-    addToDrawer(card)
+    onAddToDrawer(card)
     setTakeCard(!takeCard)
   }
-
 
   return (
     <Card className={s.conteiner} sx={{':hover': {transform: 'translateY(-0.5px)', boxShadow: '7px 7px 15px #999'}}}>

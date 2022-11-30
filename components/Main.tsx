@@ -6,22 +6,23 @@ import { CardType } from "../types/types";
 import s from "./../styles/Main.module.scss";
 
 type PropsType = {
-  data: Array<CardType>
-  addToDrawer: (el: CardType) => void
+  mainData: Array<CardType>
+  drawData: Array<CardType>
+  onAddToDrawer: (el: CardType) => void
 }
 
-const Main: FC<PropsType> = ({data, addToDrawer}) => {//todo: поделать компоненты и классы
-  const [searchValue, setSearchValue] = useState<InitialType | null>(null)
+const Main: FC<PropsType> = ({mainData, drawData, onAddToDrawer}) => {//todo: поделать компоненты и классы
+  const [searchValue, setSearchValue] = useState<InitialType>({search: ''})
   
   return (
     <main className={s.conteiner}>
       <Stack direction="row" justifyContent="space-between" mb="30px">
-        <h1>{searchValue ? `Поиск по запросу: '${searchValue.search}'` : 'Все кроссовки'}</h1>
+        <h1>{searchValue.search ? `Поиск по запросу: '${searchValue.search}'` : 'Все кроссовки'}</h1>
         <Search setSearchValue={setSearchValue} />
       </Stack>
       <Stack direction="row" justifyContent="space-between" flexWrap='wrap' gap="10px">
-        {data && data.map((card: CardType) => (
-          <CardItem card={card} key={card.id} addToDrawer={addToDrawer}/>))}
+        {mainData && mainData.filter((el:CardType) => el.title.toLowerCase().includes(searchValue.search.toLowerCase())).map((card: CardType) => (
+          <CardItem card={card} key={card.id} onAddToDrawer={onAddToDrawer}  drawData={drawData}/>))}
       </Stack>
     </main>
   )

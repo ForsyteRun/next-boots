@@ -13,10 +13,11 @@ import DrawerFooter from "./DrawerFooter";
 type PropsType = {
   shop: boolean;
   setShop: (el: boolean) => void;
+  onRemoveCardDrawer: (el: number) => void;
   item: Array<CardType>
 };
 
-const Draw: FC<PropsType> = ({ shop, setShop, item }) => {//todo: - toggleDrawer in ternar operator; - div after return; - memo
+const Draw: FC<PropsType> = ({ shop, setShop, item, onRemoveCardDrawer }) => {//todo: - toggleDrawer in ternar operator; - div after return; - memo
   
   const toggleDrawer = (ancor: boolean) => (event: KeyboardEvent | MouseEvent) => {
       if (
@@ -47,7 +48,7 @@ const Draw: FC<PropsType> = ({ shop, setShop, item }) => {//todo: - toggleDrawer
                 <h2 className={s.title}>Корзина</h2>
                 <Box className={itemData ? s.itemTrue : s.itemFalse}>
                   {itemData 
-                  ? item.map((el: CardType) => <DrawItem {...el} key={el.id} />) 
+                  ? item.map((el: CardType) => <DrawItem el={el} key={el.id} onRemoveCardDrawer={onRemoveCardDrawer}/>) 
                   : <EmptyDrawer/>
                   }
                 </Box>

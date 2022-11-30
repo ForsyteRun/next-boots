@@ -9,7 +9,7 @@ export type InitialType = {
 }
 
 type PropsType = {
-  setSearchValue: (el: InitialType | null) => void
+  setSearchValue: (el: InitialType) => void
 }
 
 const Search: FC<PropsType> = ({setSearchValue}) => {
@@ -19,7 +19,7 @@ const Search: FC<PropsType> = ({setSearchValue}) => {
   }
 
   const clearInput = (handleReset: () => void) => {
-    setSearchValue(null)
+    setSearchValue({search: ''})
     handleReset()
   }
 
