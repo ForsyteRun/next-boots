@@ -1,23 +1,24 @@
+import { Stack } from "@mui/material";
 import Box from "@mui/material/Box";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-import { FC, KeyboardEvent, MouseEvent, useState } from "react";
-import { CardType } from "../types/types";
-import DrawItem from "./DrawItem";
-import s from './../styles/Draw.module.scss'
-import { Stack } from "@mui/material";
-import Image from "next/image";
-import EmptyDrawer from "./EmptyDrawer";
 import classNames from "classnames";
+import { FC, KeyboardEvent, MouseEvent } from "react";
+import { CardType } from "../types/types";
+import s from './../styles/Draw.module.scss';
 import DrawerFooter from "./DrawerFooter";
+import DrawItem from "./DrawItem";
+import EmptyDrawer from "./EmptyDrawer";
 
 type PropsType = {
-  shop: boolean;
-  setShop: (el: boolean) => void;
-  onRemoveCardDrawer: (el: number) => void;
+  shop: boolean
+  setShop: (el: boolean) => void
+  onRemoveDrawerItem: (el: number) => void
+  drawerToogle: () => void
   item: Array<CardType>
 };
 
-const Draw: FC<PropsType> = ({ shop, setShop, item, onRemoveCardDrawer }) => {//todo: - toggleDrawer in ternar operator; - div after return; - memo
+const Draw: FC<PropsType> = ({ shop, setShop, item, onRemoveDrawerItem, drawerToogle }) => {//todo: - toggleDrawer in ternar operator; - div after return; - memo
+  const itemData = item.length > 0;
   
   const toggleDrawer = (ancor: boolean) => (event: KeyboardEvent | MouseEvent) => {
       if (
@@ -31,7 +32,6 @@ const Draw: FC<PropsType> = ({ shop, setShop, item, onRemoveCardDrawer }) => {//
       setShop(ancor);
     };
 
-    const itemData = item.length > 0;
 
   return (
     <div >
@@ -48,8 +48,8 @@ const Draw: FC<PropsType> = ({ shop, setShop, item, onRemoveCardDrawer }) => {//
                 <h2 className={s.title}>Корзина</h2>
                 <Box className={itemData ? s.itemTrue : s.itemFalse}>
                   {itemData 
-                  ? item.map((el: CardType) => <DrawItem el={el} key={el.id} onRemoveCardDrawer={onRemoveCardDrawer}/>) 
-                  : <EmptyDrawer/>
+                  ? item.map((el: CardType) => <DrawItem el={el} key={el.id} onRemoveDrawerItem={onRemoveDrawerItem}/>) 
+                  : <EmptyDrawer drawerToogle={drawerToogle}/>
                   }
                 </Box>
                  {itemData 

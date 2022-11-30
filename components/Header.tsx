@@ -11,10 +11,10 @@ import { CardType } from "../types/types";
 
 type PropsType = {
   item: Array<CardType>
-  onRemoveCardDrawer: (id: number) => void
+  onRemoveDrawerItem: (id: number) => void
 }
 
-const Header: FC<PropsType> = ({item, onRemoveCardDrawer}) => {//todo: 1.Stack to components; 2.memo; 3.add classNames to Stack
+const Header: FC<PropsType> = ({item, onRemoveDrawerItem}) => {//todo: 1.Stack to components; 2.memo; 3.add classNames to Stack
   const [shop, setShop] = useState<boolean>(false)
 
   //appear modal window drawer right side
@@ -43,7 +43,7 @@ const Header: FC<PropsType> = ({item, onRemoveCardDrawer}) => {//todo: 1.Stack t
         <AccountCircleOutlinedIcon color="primary"/>
       </Stack>
     </Stack>
-    <Draw setShop={setShop} shop={shop} item={item} onRemoveCardDrawer={onRemoveCardDrawer}/>
+    <Draw drawerToogle={drawerToogle} setShop={setShop} shop={shop} item={item} onRemoveDrawerItem={onRemoveDrawerItem}/>
    </header>
   )
 }

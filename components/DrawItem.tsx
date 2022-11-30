@@ -1,5 +1,4 @@
 import { Box, Card, CardContent } from "@mui/material";
-import { Stack } from "@mui/system";
 import Image from "next/image";
 import { FC } from "react";
 import { CardType } from "../types/types";
@@ -7,11 +6,11 @@ import s from "./../styles/DrawItem.module.scss";
 import ClearIcon from "@mui/icons-material/Clear";
 
 type PropsType = {
-  onRemoveCardDrawer: (el: number) => void;
+  onRemoveDrawerItem: (el: number) => void;
   el: CardType
 }
 
-const DrawItem: FC<PropsType> = ({ el, onRemoveCardDrawer}) => {
+const DrawItem: FC<PropsType> = ({ el, onRemoveDrawerItem}) => {
 
   return (
     <Card className={s.conteiner} >
@@ -22,11 +21,10 @@ const DrawItem: FC<PropsType> = ({ el, onRemoveCardDrawer}) => {
           <p className={s.price}>{el.price} uah</p>
         </Box>
         <ClearIcon 
-        sx={{cursor: 'pointer', '&:hover': { transform: "scale(1.5)", transition: 'all .2s ease-out' }, transition: 'all .2s ease-out'}}
-        onClick={() => onRemoveCardDrawer(el.id)}/>
+        className={s.removeBtn}
+        onClick={() => onRemoveDrawerItem(el.id)}/>
       </CardContent>
     </Card>
-
   );
 };
 

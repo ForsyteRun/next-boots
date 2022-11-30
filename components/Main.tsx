@@ -7,11 +7,10 @@ import s from "./../styles/Main.module.scss";
 
 type PropsType = {
   mainData: Array<CardType>
-  drawData: Array<CardType>
-  onAddToDrawer: (el: CardType) => void
+  onAddDrawerItem: (el: CardType) => void
 }
 
-const Main: FC<PropsType> = ({mainData, drawData, onAddToDrawer}) => {//todo: поделать компоненты и классы
+const Main: FC<PropsType> = ({mainData, onAddDrawerItem}) => {//todo: поделать компоненты и классы
   const [searchValue, setSearchValue] = useState<InitialType>({search: ''})
   
   return (
@@ -22,7 +21,7 @@ const Main: FC<PropsType> = ({mainData, drawData, onAddToDrawer}) => {//todo: п
       </Stack>
       <Stack direction="row" justifyContent="space-between" flexWrap='wrap' gap="10px">
         {mainData && mainData.filter((el:CardType) => el.title.toLowerCase().includes(searchValue.search.toLowerCase())).map((card: CardType) => (
-          <CardItem card={card} key={card.id} onAddToDrawer={onAddToDrawer}  drawData={drawData}/>))}
+          <CardItem card={card} key={card.id} onAddDrawerItem={onAddDrawerItem} />))}
       </Stack>
     </main>
   )

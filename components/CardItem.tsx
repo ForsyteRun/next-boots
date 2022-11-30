@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { CardType } from "../types/types";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -10,23 +10,17 @@ import add from "public/card/add.svg";
 import notAdd from "public/card/notAdd.svg";
 
 type PropsType = {
-  drawData: Array<CardType>
   card: CardType
-  onAddToDrawer: (el: CardType) => void
+  onAddDrawerItem: (el: CardType) => void
 }
 
-const CardItem: FC<PropsType> = ({card, onAddToDrawer, drawData}) => {//todo: 1.add classNames;
+const CardItem: FC<PropsType> = ({card, onAddDrawerItem}) => {//todo: 1.add classNames;
   
   const [favorite, setFavorite] = useState<boolean>(false)
   const [takeCard, setTakeCard] = useState<boolean>(false)
   
-  // useEffect(() => {
-  //  console.log(drawData);
-  //   // drawData.length > 0 ? setTakeCard(true) : null
-  // }, [])
-
   const addCard = () => {
-    onAddToDrawer(card)
+    onAddDrawerItem(card)
     setTakeCard(!takeCard)
   }
 

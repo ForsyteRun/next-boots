@@ -38,3 +38,12 @@ $borderSmall: #F3F3F3;
    color: $textBlack;
    font-weight: 700;
 }
+
+.removeBtn {
+   cursor: pointer;
+   transition: all .2s ease-out;
+   &:hover {
+      transform: scale(1.3);
+      transition: all .2s ease-out;
+   }
+}
