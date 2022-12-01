@@ -15,15 +15,14 @@ type PropsType = {
 }
 
 const Header: FC<PropsType> = ({item, onRemoveDrawerItem}) => {//todo: 1.Stack to components; 2.memo; 3.add classNames to Stack
-  
   const [shop, setShop] = useState<boolean>(false)
+
   const res = item.filter((el: CardType) => el.chacked===true).length
 
   //appear modal window drawer right side
   const drawerToogle = () => {
     setShop(!shop)
 }
-
 
   return ( 
    <header>

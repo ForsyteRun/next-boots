@@ -6,11 +6,12 @@ import { CardType } from "../types/types";
 import s from "./../styles/Main.module.scss";
 
 type PropsType = {
-  mainData: Array<CardType>
-  onAddDrawerItem: (el: CardType) => void
+  item: Array<CardType>
+  onAddDrawerItem: (obj: CardType) => void
+  onRemoveDrawerItem: (obj: CardType) => void
 }
 
-const Main: FC<PropsType> = ({mainData, onAddDrawerItem}) => {//todo: поделать компоненты и классы
+const Main: FC<PropsType> = ({item, onAddDrawerItem, onRemoveDrawerItem}) => {//todo: поделать компоненты и классы
   const [searchValue, setSearchValue] = useState<InitialType>({search: ''})
   
   return (
@@ -20,8 +21,8 @@ const Main: FC<PropsType> = ({mainData, onAddDrawerItem}) => {//todo: подел
         <Search setSearchValue={setSearchValue} />
       </Stack>
       <Stack direction="row" justifyContent="space-between" flexWrap='wrap' gap="10px">
-        {mainData && mainData.filter((el:CardType) => el.title.toLowerCase().includes(searchValue.search.toLowerCase())).map((card: CardType) => (
-          <CardItem card={card} key={card.id} onAddDrawerItem={onAddDrawerItem} />))}
+        {item.filter((el:CardType) => el.title.toLowerCase().includes(searchValue.search.toLowerCase())).map((card: CardType) => (
+          <CardItem card={card} key={card.id} onAddDrawerItem={onAddDrawerItem} onRemoveDrawerItem={onRemoveDrawerItem}/>))}
       </Stack>
     </main>
   )

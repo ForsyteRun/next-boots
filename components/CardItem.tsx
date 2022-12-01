@@ -11,20 +11,21 @@ import notAdd from "public/card/notAdd.svg";
 
 type PropsType = {
   card: CardType
-  onAddDrawerItem: (el: CardType) => void
+  onAddDrawerItem: (obj: CardType) => void
+  onRemoveDrawerItem: (obj: CardType) => void
 }
 
-const CardItem: FC<PropsType> = ({card, onAddDrawerItem}) => {//todo: 1.add classNames;
-  const {img, title, price} = card;
+const CardItem: FC<PropsType> = ({card, onAddDrawerItem, onRemoveDrawerItem}) => {//todo: 1.add classNames;
+  const {chacked, img, title, price} = card;
   
   const [favorite, setFavorite] = useState<boolean>(false)
-  const [takeCard, setTakeCard] = useState<boolean>(false)
+  const [drawerItem, setDrawerItem] = useState<boolean>(false)
   
-  const addCard = () => {
-    onAddDrawerItem(card)
-    setTakeCard(!takeCard)
+  const toogleBtn = () => {
+    setDrawerItem(!drawerItem)
+    drawerItem ? onAddDrawerItem(card) : onRemoveDrawerItem(card)
   }
-
+  
   return (
     <Card className={s.conteiner} sx={{':hover': {transform: 'translateY(-0.5px)', boxShadow: '7px 7px 15px #999'}}}>
       <CardContent className={s.content}>
@@ -33,7 +34,7 @@ const CardItem: FC<PropsType> = ({card, onAddDrawerItem}) => {//todo: 1.add clas
         <p className={s.title}>{title}</p>
         <div className={s.titlePrice}>цена</div>
         <p className={s.price}>{price} uah</p>
-        <Image onClick={addCard} className={s.add} src={takeCard ? notAdd : add} alt="add" />
+        <Image onClick={toogleBtn} className={s.add} src={chacked ? notAdd : add} alt="add" />
       </CardContent>
     </Card>
   );
