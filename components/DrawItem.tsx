@@ -6,7 +6,7 @@ import s from "./../styles/DrawItem.module.scss";
 import ClearIcon from "@mui/icons-material/Clear";
 
 type PropsType = {
-  onRemoveDrawerItem: (el: number) => void;
+  onRemoveDrawerItem: (obj: CardType) => void;
   el: CardType
 }
 
@@ -22,7 +22,7 @@ const DrawItem: FC<PropsType> = ({ el, onRemoveDrawerItem}) => {
         </Box>
         <ClearIcon 
         className={s.removeBtn}
-        onClick={() => onRemoveDrawerItem(el.id)}/>
+        onClick={() => onRemoveDrawerItem(el)}/>
       </CardContent>
     </Card>
   );

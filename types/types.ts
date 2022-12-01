@@ -4,4 +4,5 @@ export type CardType = {
    img: string
    price: number
    like: boolean
+   chacked: boolean
 }

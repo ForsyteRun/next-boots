@@ -8,33 +8,40 @@ import { CardType } from "../types/types";
 
 type PropsType = {
     mainData:  Array<CardType>
-    drawData:  Array<CardType>
 }
 
-const Home: NextPage<PropsType> = ({mainData, drawData}) => {
-  const [item, setItem] = useState<Array<CardType>>(drawData)
-
+const Home: NextPage<PropsType> = ({mainData}) => {
+  const [item, setItem] = useState<any>(mainData)
+  console.log(item)
   const onAddDrawerItem = async (obj: CardType) => {
     try {
-      await fetch('https://630f1ba6498924524a860c3f.mockapi.io/draw', {
-        method: 'POST',
-        body: JSON.stringify(obj),
+     const res = await fetch(`https://630f1ba6498924524a860c3f.mockapi.io/users/${obj.id}`, {
+        method: 'PUT',
+        body: JSON.stringify({chacked: true}),
         headers: {
           'Content-Type': 'application/json'
         }
       })
-     setItem(prev => [...prev, obj])
+      const data = await res.json()
+      const arr = item.map((el: any)=> el.id === data.id && data)
+      console.log(arr);
+      setItem((prev: any) => [...prev, {arr: data}])
     } catch (error) {
       throw new Error(`Error in onAddToDrawer: ${error}`);
     }
   }
-
-  const onRemoveDrawerItem = async (id: number) => {
+  
+  const onRemoveDrawerItem = async (obj: CardType) => {
     try {
-      await fetch(`https://630f1ba6498924524a860c3f.mockapi.io/draw/${id}`, {
-        method: 'DELETE',
+      const res = await fetch(`https://630f1ba6498924524a860c3f.mockapi.io/users/${obj.id}`, {
+        method: 'PUT',
+        body: JSON.stringify({chacked: false}),
+        headers: {
+          'Content-Type': 'application/json'
+        }
       })
-      setItem(prev => prev.filter((el: CardType) => el.id !== id)) 
+      const data = await res.json()
+      setItem((prev: any) => [...prev, data])
     } catch (error) {
       throw new Error(`Error in onRemoveCardDrawer: ${error}`);
     }
@@ -56,9 +63,7 @@ const Home: NextPage<PropsType> = ({mainData, drawData}) => {
 Home.getInitialProps = async () => {
   const res = await fetch('https://630f1ba6498924524a860c3f.mockapi.io/users')
   const mainData = await res.json()
-  const resDraw = await fetch('https://630f1ba6498924524a860c3f.mockapi.io/draw')
-  const drawData = await resDraw.json()
-  return {mainData, drawData}
+  return {mainData}
 }
 
 export default Home;

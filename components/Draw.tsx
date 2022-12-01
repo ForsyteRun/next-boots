@@ -12,14 +12,14 @@ import EmptyDrawer from "./EmptyDrawer";
 type PropsType = {
   shop: boolean
   setShop: (el: boolean) => void
-  onRemoveDrawerItem: (el: number) => void
+  onRemoveDrawerItem: (obj: CardType) => void
   drawerToogle: () => void
   item: Array<CardType>
 };
 
 const Draw: FC<PropsType> = ({ shop, setShop, item, onRemoveDrawerItem, drawerToogle }) => {//todo: - toggleDrawer in ternar operator; - div after return; - memo
   const itemData = item.length > 0;
-  
+
   const toggleDrawer = (ancor: boolean) => (event: KeyboardEvent | MouseEvent) => {
       if (
         event &&
@@ -47,8 +47,8 @@ const Draw: FC<PropsType> = ({ shop, setShop, item, onRemoveDrawerItem, drawerTo
               <Stack className={classNames(s.content, {[s.contentEmpty]: !itemData})} role="presentation" direction='column'>
                 <h2 className={s.title}>Корзина</h2>
                 <Box className={itemData ? s.itemTrue : s.itemFalse}>
-                  {itemData 
-                  ? item.map((el: CardType) => <DrawItem el={el} key={el.id} onRemoveDrawerItem={onRemoveDrawerItem}/>) 
+                  {item
+                  ? item.filter((el: CardType)=> el.chacked === true).map((el: CardType) => <DrawItem el={el} key={el.id} onRemoveDrawerItem={onRemoveDrawerItem}/>) 
                   : <EmptyDrawer drawerToogle={drawerToogle}/>
                   }
                 </Box>

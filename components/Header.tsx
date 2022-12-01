@@ -11,16 +11,19 @@ import { CardType } from "../types/types";
 
 type PropsType = {
   item: Array<CardType>
-  onRemoveDrawerItem: (id: number) => void
+  onRemoveDrawerItem: (obj: CardType) => void
 }
 
 const Header: FC<PropsType> = ({item, onRemoveDrawerItem}) => {//todo: 1.Stack to components; 2.memo; 3.add classNames to Stack
+  
   const [shop, setShop] = useState<boolean>(false)
+  const res = item.filter((el: CardType) => el.chacked===true).length
 
   //appear modal window drawer right side
   const drawerToogle = () => {
     setShop(!shop)
 }
+
 
   return ( 
    <header>
@@ -33,7 +36,7 @@ const Header: FC<PropsType> = ({item, onRemoveDrawerItem}) => {//todo: 1.Stack t
       <Stack direction={"row"} justifyContent={'space-between'} width='196px'>
         <Stack width='95px' className={s.shop}>
           <div onClick={drawerToogle} >
-          <Badge badgeContent={item.length} color="error">
+          <Badge badgeContent={res} color="error">
             <ShoppingCartOutlinedIcon color="primary" sx={{cursor: 'pointer'}}/>  
           </Badge>
           </div>

@@ -15,6 +15,7 @@ type PropsType = {
 }
 
 const CardItem: FC<PropsType> = ({card, onAddDrawerItem}) => {//todo: 1.add classNames;
+  const {img, title, price} = card;
   
   const [favorite, setFavorite] = useState<boolean>(false)
   const [takeCard, setTakeCard] = useState<boolean>(false)
@@ -28,10 +29,10 @@ const CardItem: FC<PropsType> = ({card, onAddDrawerItem}) => {//todo: 1.add clas
     <Card className={s.conteiner} sx={{':hover': {transform: 'translateY(-0.5px)', boxShadow: '7px 7px 15px #999'}}}>
       <CardContent className={s.content}>
       <Image  onClick={()=>setFavorite(!favorite)} className={s.like} src={favorite ? like : unLike} alt="like" />
-        <Image src= {card.img} width={133} height={114} alt="card" />
-        <p className={s.title}>{card.title}</p>
+        <Image src= {img} width={133} height={114} alt="card" />
+        <p className={s.title}>{title}</p>
         <div className={s.titlePrice}>цена</div>
-        <p className={s.price}>{card.price} uah</p>
+        <p className={s.price}>{price} uah</p>
         <Image onClick={addCard} className={s.add} src={takeCard ? notAdd : add} alt="add" />
       </CardContent>
     </Card>
