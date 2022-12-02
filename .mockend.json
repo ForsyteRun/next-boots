@@ -1,0 +1,11 @@
+{
+  "Users": {
+    "title": { "string": {} },
+  },
+  "Comment": {
+    "body": { "string": {} },
+    "post": {
+      "belongsTo": "Post"
+    }
+  }
+}
