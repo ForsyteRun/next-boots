@@ -1,6 +1,6 @@
 import { Badge, Stack } from "@mui/material"
 import Image from "next/image"
-import { FC, useState} from "react"
+import { FC, useContext, useState} from "react"
 import logo from './../public/logo.png'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
@@ -8,18 +8,15 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 import s from './../styles/Header.module.scss'
 import Draw from "./Draw";
 import { CardType } from "../types/types";
+import { Context } from "./AppContext";
+import Link from 'next/link'
 
-type PropsType = {
-  item: Array<CardType>
-  onRemoveDrawerItem: (obj: CardType) => void
-}
-
-const Header: FC<PropsType> = ({item, onRemoveDrawerItem}) => {//todo: 1.Stack to components; 2.memo; 3.add classNames to Stack
+const Header: FC = () => {//todo: 1.Stack to components; 2.memo; 3.add classNames to Stack
   const [shop, setShop] = useState<boolean>(false)
+  const {item} = useContext(Context)
 
   const res = item.filter((el: CardType) => el.chacked===true).length
 
-  //appear modal window drawer right side
   const drawerToogle = () => {
     setShop(!shop)
 }
@@ -27,7 +24,7 @@ const Header: FC<PropsType> = ({item, onRemoveDrawerItem}) => {//todo: 1.Stack t
   return ( 
    <header>
     <Stack direction={"row"} className={s.conteiner}>
-      <Image src={logo} alt='logo' />
+      <Link href="/"><Image src={logo} alt='logo' /></Link>
       <Stack className={s.headerCenter}>
         <h3 className={s.title}>REACT SNEAKERS</h3>
         <div className={s.subTitle}>Магазин лучших кроссовок</div>
@@ -41,11 +38,13 @@ const Header: FC<PropsType> = ({item, onRemoveDrawerItem}) => {//todo: 1.Stack t
           </div>
           <span style={{marginLeft: '15px'}}>1205uah</span>          
         </Stack>
-        <FavoriteBorderOutlinedIcon color="primary"/>
+        <Link href="/favorites">
+          <FavoriteBorderOutlinedIcon color="primary" />
+        </Link>
         <AccountCircleOutlinedIcon color="primary"/>
       </Stack>
     </Stack>
-    <Draw drawerToogle={drawerToogle} setShop={setShop} shop={shop} item={item} onRemoveDrawerItem={onRemoveDrawerItem}/>
+    <Draw drawerToogle={drawerToogle} setShop={setShop} shop={shop} />
    </header>
   )
 }

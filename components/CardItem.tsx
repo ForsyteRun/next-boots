@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useContext, useState } from "react";
 import { CardType } from "../types/types";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -8,22 +8,23 @@ import unLike from "public/card/unLike.png";
 import like from "public/card/like.png";
 import add from "public/card/add.svg";
 import notAdd from "public/card/notAdd.svg";
+import { Context } from "./AppContext";
 
 type PropsType = {
   card: CardType
-  onAddDrawerItem: (obj: CardType) => void
-  onRemoveDrawerItem: (obj: CardType) => void
 }
 
-const CardItem: FC<PropsType> = ({card, onAddDrawerItem, onRemoveDrawerItem}) => {//todo: 1.add classNames;
+const CardItem: FC<PropsType> = ({card}) => {//todo: 1.add classNames;
   const {chacked, img, title, price} = card;
   
   const [favorite, setFavorite] = useState<boolean>(false)
   const [drawerItem, setDrawerItem] = useState<boolean>(false)
   
+  const {onAddDrawerItem, onRemoveDrawerItem} = useContext(Context)
+
   const toogleBtn = () => {
     setDrawerItem(!drawerItem)
-    drawerItem ? onAddDrawerItem(card) : onRemoveDrawerItem(card)
+    drawerItem ? onRemoveDrawerItem(card) : onAddDrawerItem(card)
   }
   
   return (

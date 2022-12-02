@@ -6,13 +6,15 @@ import {
   ThemeOptions,
   ThemeProvider,
 } from "@mui/material";
-import type { AppProps } from "next/app";
-import Layout from "../components/Layout";
 import "../styles/globals.scss";
 import s from "./../styles/App.module.scss";
 import { Inter } from "@next/font/google";
+import type { ReactElement, ReactNode } from "react";
+import type { NextPage } from "next";
+import type { AppProps } from "next/app";
+import Layout from "../components/Layout";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ["latin"] });
 declare module "@mui/material/styles" {
   interface Theme {
     breakpoints: {
@@ -52,33 +54,47 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: [].join(","),
-  }, 
+  },
   palette: {
     primary: {
-      main: '#9D9D9D',
+      main: "#9D9D9D",
     },
     secondary: {
-      light: '#ff7961',
-      main: '#f44336',
-      dark: '#ba000d',
-      contrastText: '#000',
+      light: "#ff7961",
+      main: "#f44336",
+      dark: "#ba000d",
+      contrastText: "#000",
     },
   },
 } as IThemeOptions);
 
 // theme = responsiveFontSizes(theme)
 
-const App = ({ Component, pageProps }: AppProps) => {//todo: responsiveFontSizes mui
-  return (
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Container maxWidth="lg" sx={{height: '100%'}} className={inter.className}>
-          <Box className={s.wrapper}>
-            <Layout>
-                <Component {...pageProps} />
-            </Layout>
-          </Box>
-        </Container>
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
+
+const App = ({ Component, pageProps }: AppPropsWithLayout) => {
+  const getLayout = Component.getLayout ?? ((page) => page);
+
+  return getLayout(
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Container
+        maxWidth="lg"
+        sx={{ height: "100vh" }}
+        className={inter.className}
+      >
+        <Box className={s.wrapper}>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </Box>
+      </Container>
     </ThemeProvider>
   );
 };

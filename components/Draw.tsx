@@ -2,9 +2,10 @@ import { Stack } from "@mui/material";
 import Box from "@mui/material/Box";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import classNames from "classnames";
-import { FC, KeyboardEvent, MouseEvent } from "react";
+import { FC, KeyboardEvent, MouseEvent, useContext } from "react";
 import { CardType } from "../types/types";
 import s from './../styles/Draw.module.scss';
+import { Context } from "./AppContext";
 import DrawerFooter from "./DrawerFooter";
 import DrawItem from "./DrawItem";
 import EmptyDrawer from "./EmptyDrawer";
@@ -12,12 +13,12 @@ import EmptyDrawer from "./EmptyDrawer";
 type PropsType = {
   shop: boolean
   setShop: (el: boolean) => void
-  onRemoveDrawerItem: (obj: CardType) => void
   drawerToogle: () => void
-  item: Array<CardType>
 };
 
-const Draw: FC<PropsType> = ({ shop, setShop, item, onRemoveDrawerItem, drawerToogle }) => {//todo: - toggleDrawer in ternar operator; - div after return; - memo
+const Draw: FC<PropsType> = ({ shop, setShop, drawerToogle }) => {//todo: - toggleDrawer in ternar operator; - div after return; - memo
+  
+  const {item, onRemoveDrawerItem} = useContext(Context)
   const itemData = item.find((el: CardType)=> el.chacked === true)
 
   const toggleDrawer = (ancor: boolean) => (event: KeyboardEvent | MouseEvent) => {
