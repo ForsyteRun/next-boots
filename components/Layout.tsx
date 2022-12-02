@@ -11,7 +11,6 @@ type Props = {
 const Layout: FC<Props> = ({ children }: Props) => {
 
   const [item, setItem] = useState<Array<CardType>>([])
-  console.log(item);
   
   useEffect(() => {
     try {
@@ -25,7 +24,7 @@ const Layout: FC<Props> = ({ children }: Props) => {
   
   const onAddDrawerItem = async (obj: CardType) => {
     try {
-     const res = await fetch(`https://630f1ba6498924524a860c3f.mockapi.io/users/${obj.id}`, {
+      const res = await fetch(`https://630f1ba6498924524a860c3f.mockapi.io/users/${obj.id}`, {
         method: 'PUT',
         body: JSON.stringify({chacked: true}),
         headers: {
@@ -73,6 +72,7 @@ const Layout: FC<Props> = ({ children }: Props) => {
       throw new Error(`Error in onAddToDrawer: ${error}`);
     }
   }
+
   const onRemoveFavoriteItem = async (obj: CardType) => {
     try {
       const res = await fetch(`https://630f1ba6498924524a860c3f.mockapi.io/users/${obj.id}`, {
@@ -90,10 +90,10 @@ const Layout: FC<Props> = ({ children }: Props) => {
     }
   }
   
-  
+  const value = {item, onAddDrawerItem, onRemoveDrawerItem, onAddFavoriteItem, onRemoveFavoriteItem}
   return (
     <>
-    <Context.Provider value={{item, onAddDrawerItem, onRemoveDrawerItem, onAddFavoriteItem, onRemoveFavoriteItem}}>
+    <Context.Provider value={value}>
       <Header />
         <main className={s.conteiner}>
             {children}

@@ -6,7 +6,7 @@ import { CardType } from "../types/types";
 import s from "./../styles/Main.module.scss";
 import { Context } from "./AppContext";
 
-const Main: FC = () => {//todo: поделать компоненты и классы
+const Main: FC = () => {
   const [searchValue, setSearchValue] = useState<InitialType>({search: ''})
   const {item} = useContext(Context)
 

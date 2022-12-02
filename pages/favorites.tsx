@@ -13,6 +13,7 @@ const Favorites: FC = () => {
          <title>Favorite</title>
          <meta name="description" content="Favorite" />
       </Head>
+      <h2>Мои закладки</h2>
       <Stack direction="row" justifyContent="space-between" flexWrap='wrap' gap="10px">
          {item.filter((el: CardType)=>el.like===true).map((card: CardType) => <CardItem card={card} key={card.id} />)}
       </Stack>

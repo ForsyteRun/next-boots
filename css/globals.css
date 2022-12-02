@@ -1,0 +1,30 @@
+html,
+body,
+#__next {
+  font-family: 'Inter', sans-serif;
+  background-color: #e0dede;
+}
+
+html h1, html h2, html h3, html h4, html h5, html p,
+body h1,
+body h2,
+body h3,
+body h4,
+body h5,
+body p,
+#__next h1,
+#__next h2,
+#__next h3,
+#__next h4,
+#__next h5,
+#__next p {
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+/*# sourceMappingURL=globals.css.map */

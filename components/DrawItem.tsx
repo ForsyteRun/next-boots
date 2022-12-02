@@ -1,24 +1,26 @@
 import { Box, Card, CardContent } from "@mui/material";
 import Image from "next/image";
-import { FC } from "react";
+import { FC, useContext } from "react";
 import { CardType } from "../types/types";
 import s from "./../styles/DrawItem.module.scss";
 import ClearIcon from "@mui/icons-material/Clear";
+import { Context } from "./AppContext";
 
 type PropsType = {
-  onRemoveDrawerItem: (obj: CardType) => void;
   el: CardType
 }
 
-const DrawItem: FC<PropsType> = ({ el, onRemoveDrawerItem}) => {
+const DrawItem: FC<PropsType> = ({el}) => {
+  const {price, title, img} = el
+  const {onRemoveDrawerItem} = useContext(Context)
 
   return (
     <Card className={s.conteiner} >
       <CardContent className={s.content}>
-        <Image src={el.img} width={70} height={70} alt="cardDraw" />
+        <Image src={img} width={70} height={70} alt="cardDraw" />
         <Box sx={{flexGrow: 1}}>
-          <p className={s.title}>{el.title}</p>
-          <p className={s.price}>{el.price} uah</p>
+          <p className={s.title}>{title}</p>
+          <p className={s.price}>{price} uah</p>
         </Box>
         <ClearIcon 
         className={s.removeBtn}

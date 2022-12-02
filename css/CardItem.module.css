@@ -1,0 +1,58 @@
+.title {
+  font-weight: 600;
+  font-size: 14px;
+  color: #000;
+  line-height: 1.21;
+}
+
+.price {
+  font-weight: 700;
+  color: #000;
+  line-height: 1.21;
+}
+
+.titlePrice {
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.21;
+  text-transform: uppercase;
+  color: #9D9D9D;
+}
+
+.conteiner {
+  width: 210px;
+  height: 260px;
+  border-radius: 40px;
+}
+
+.conteiner .content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  padding: 30px;
+}
+
+.conteiner .content .like {
+  width: 32px;
+  position: absolute;
+  left: 15%;
+  top: 15%;
+}
+
+.conteiner .content .add {
+  width: 32px;
+  position: absolute;
+  left: 68%;
+  top: 78%;
+}
+/*# sourceMappingURL=CardItem.module.css.map */

@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAQA,AAAA,UAAU,CAAC;EACR,WAAW,EAPG,IAAI;EAQlB,KAAK,EAVI,IAAI;CAWf;;AAED,AAAA,MAAM,CAAC;EACJ,QAAQ,EAAE,QAAQ;EAClB,GAAG,EAAE,IAAI;EACT,MAAM,EAAE,MAAM;EACd,SAAS,EAAE,CAAC;EACZ,aAAa,EAAE,GAAG,CAAC,MAAM,CAjBjB,OAAO;CAkBjB;;AAED,AAAA,MAAM,GAAG,IAAI,CAAC;EACX,WAAW,EAAE,GAAG;CAClB",
+    "sources": [
+        "../styles/DrawerFooter.module.scss"
+    ],
+    "names": [],
+    "file": "DrawerFooter.module.css"
+}
