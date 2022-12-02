@@ -15,7 +15,8 @@ const Header: FC = () => {//todo: 1.Stack to components; 2.memo; 3.add className
   const [shop, setShop] = useState<boolean>(false)
   const {item} = useContext(Context)
 
-  const res = item.filter((el: CardType) => el.chacked===true).length
+  const countAddDrawItem = item.filter((el: CardType) => el.chacked===true).length
+  const countAddFavoriteItem = item.filter((el: CardType) => el.like===true).length
 
   const drawerToogle = () => {
     setShop(!shop)
@@ -32,14 +33,16 @@ const Header: FC = () => {//todo: 1.Stack to components; 2.memo; 3.add className
       <Stack direction={"row"} justifyContent={'space-between'} width='196px'>
         <Stack width='95px' className={s.shop}>
           <div onClick={drawerToogle} >
-          <Badge badgeContent={res} color="error">
+          <Badge badgeContent={countAddDrawItem} color="error">
             <ShoppingCartOutlinedIcon color="primary" sx={{cursor: 'pointer'}}/>  
           </Badge>
           </div>
           <span style={{marginLeft: '15px'}}>1205uah</span>          
         </Stack>
         <Link href="/favorites">
+        <Badge badgeContent={countAddFavoriteItem} color="error">
           <FavoriteBorderOutlinedIcon color="primary" />
+        </Badge>
         </Link>
         <AccountCircleOutlinedIcon color="primary"/>
       </Stack>
