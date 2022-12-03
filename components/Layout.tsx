@@ -11,15 +11,19 @@ type Props = {
 const Layout: FC<Props> = ({ children }: Props) => {
 
   const [item, setItem] = useState<Array<CardType>>([])
-  
+  const [sceleton, setSceleton] = useState<boolean>(true)
+
   useEffect(() => {
-    try {
-      fetch('https://630f1ba6498924524a860c3f.mockapi.io/users')
-      .then(res => res.json())
-      .then(data => setItem(data))
-    } catch (error) {
-      throw new Error(`Error in: ${error}`);
+    const initData = async () => {
+      try {
+        const res: Array<CardType> = await (await fetch('https://630f1ba6498924524a860c3f.mockapi.io/users')).json()
+        setItem(res) 
+        setSceleton(false)
+      } catch (error) {
+        throw new Error(`Error in: ${error}`);
+      }
     }
+    initData()
   }, [])
   
   const onAddDrawerItem = async (obj: CardType) => {
@@ -31,9 +35,8 @@ const Layout: FC<Props> = ({ children }: Props) => {
           'Content-Type': 'application/json'
         }
       })
-      const data = await res.json()
-      const arr = item.map((el: CardType)=> el.id === data.id ? Object.assign({}, el, {chacked: true}) : el)
-      setItem(arr)
+      const data: CardType = await res.json()
+      setItem(prev => prev.map((el: CardType)=> el.id === data.id ? Object.assign({}, el, {chacked: true}) : el))
     } catch (error) {
       throw new Error(`Error in onAddToDrawer: ${error}`);
     }
@@ -48,9 +51,8 @@ const Layout: FC<Props> = ({ children }: Props) => {
           'Content-Type': 'application/json'
         }
       })
-      const data = await res.json()
-      const arr = item.map((el: CardType)=> el.id === data.id ? Object.assign({}, el, {chacked: false}) : el)
-      setItem(arr)
+      const data: CardType = await res.json()
+      setItem(prev => prev.map((el: CardType)=> el.id === data.id ? Object.assign({}, el, {chacked: false}) : el))
     } catch (error) {
       throw new Error(`Error in onRemoveCardDrawer: ${error}`);
     }
@@ -65,9 +67,8 @@ const Layout: FC<Props> = ({ children }: Props) => {
           'Content-Type': 'application/json'
         }
       })
-      const data = await res.json()
-      const arr = item.map((el: CardType)=> el.id === data.id ? Object.assign({}, el, {like: true}) : el)
-      setItem(arr)
+      const data: CardType = await res.json()
+      setItem(prev => prev.map((el: CardType)=> el.id === data.id ? Object.assign({}, el, {like: true}) : el))
     } catch (error) {
       throw new Error(`Error in onAddToDrawer: ${error}`);
     }
@@ -82,15 +83,15 @@ const Layout: FC<Props> = ({ children }: Props) => {
           'Content-Type': 'application/json'
         }
       })
-      const data = await res.json()
-      const arr = item.map((el: CardType)=> el.id === data.id ? Object.assign({}, el, {like: false}) : el)
-      setItem(arr)
+      const data: CardType = await res.json()
+      setItem(prev => prev.map((el: CardType)=> el.id === data.id ? Object.assign({}, el, {like: false}) : el))
     } catch (error) {
       throw new Error(`Error in onRemoveCardDrawer: ${error}`);
     }
   }
   
-  const value = {item, onAddDrawerItem, onRemoveDrawerItem, onAddFavoriteItem, onRemoveFavoriteItem}
+  const value = {item, sceleton, onAddDrawerItem, onRemoveDrawerItem, onAddFavoriteItem, onRemoveFavoriteItem}
+
   return (
     <>
     <Context.Provider value={value}>

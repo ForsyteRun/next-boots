@@ -3,6 +3,7 @@ import { CardType } from '../types/types';
 
 export type ContextType = {
    item: Array<CardType>;
+   sceleton: boolean;
    onRemoveDrawerItem: (obj: CardType) => void;
    onAddDrawerItem: (obj: CardType) => void;
    onAddFavoriteItem: (obj: CardType) => void;
@@ -11,6 +12,7 @@ export type ContextType = {
 
 export const contextDefaultValues: ContextType = {
    item: [],
+   sceleton: true,
    onRemoveDrawerItem: () => {},
    onAddDrawerItem: () => {},
    onAddFavoriteItem: () => {},

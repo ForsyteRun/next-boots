@@ -70,25 +70,16 @@ const theme = createTheme({
 
 // theme = responsiveFontSizes(theme)
 
-export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
-  getLayout?: (page: ReactElement) => ReactNode;
-};
+const App = ({ Component, pageProps }: AppProps) => {
 
-type AppPropsWithLayout = AppProps & {
-  Component: NextPageWithLayout;
-};
-
-const App = ({ Component, pageProps }: AppPropsWithLayout) => {
-  const getLayout = Component.getLayout ?? ((page) => page);
-
-  return getLayout(
+  return(
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Container
         maxWidth="lg"
         sx={{ height: "100vh" }}
         className={inter.className}
-      >
+        >
         <Box className={s.wrapper}>
           <Layout>
             <Component {...pageProps} />
@@ -96,7 +87,7 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
         </Box>
       </Container>
     </ThemeProvider>
-  );
+   )
 };
 
 export default App;

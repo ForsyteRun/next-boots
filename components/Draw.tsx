@@ -5,7 +5,7 @@ import classNames from "classnames";
 import { FC, KeyboardEvent, MouseEvent, useContext } from "react";
 import { CardType } from "../types/types";
 import s from './../styles/Draw.module.scss';
-import { Context } from "./AppContext";
+import { Context, ContextType } from "./AppContext";
 import DrawerFooter from "./DrawerFooter";
 import DrawItem from "./DrawItem";
 import EmptyDrawer from "./EmptyDrawer";
@@ -17,7 +17,7 @@ type PropsType = {
 
 const Draw: FC<PropsType> = ({ shop, setShop }) => {//todo: - memo
   
-  const {item} = useContext(Context)
+  const {item} = useContext<ContextType>(Context)
   const itemData = item.find((el: CardType)=> el.chacked === true)
 
   const toggleDrawer = (ancor: boolean) => (event: KeyboardEvent | MouseEvent) => {
@@ -31,7 +31,6 @@ const Draw: FC<PropsType> = ({ shop, setShop }) => {//todo: - memo
       }
       setShop(ancor);
     };
-
 
   return (
     <div >
@@ -48,7 +47,7 @@ const Draw: FC<PropsType> = ({ shop, setShop }) => {//todo: - memo
                 <h2 className={s.title}>Корзина</h2>
                 <Box className={itemData ? s.itemTrue : s.itemFalse}>
                   {itemData
-                  ? item.filter((el: CardType)=> el.chacked === true).map((el: CardType) => <DrawItem el={el} key={el.id}/>) 
+                  ? item.filter((el: CardType)=> el.chacked === true).map((el: CardType) => <DrawItem el={el} key={el.id}/> ) 
                   : <EmptyDrawer setShop={setShop}/>
                   }
                 </Box>

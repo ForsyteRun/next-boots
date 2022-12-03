@@ -8,19 +8,20 @@ import unLike from "public/card/unLike.png";
 import liked from "public/card/liked.png";
 import add from "public/card/add.svg";
 import notAdd from "public/card/notAdd.svg";
-import { Context } from "./AppContext";
+import { Context, ContextType } from "./AppContext";
 
 type PropsType = {
   card: CardType
 }
 
-const CardItem: FC<PropsType> = ({card}) => {//todo: 1.add classNames;
+const CardItem: FC<PropsType> = ({card}) => {
+  //todo: 1.add classNames; 2. два раза нажимать для смены toogleDrawItem и setFavoriteItem
   const {chacked, like, img, title, price} = card;
   
   const [drawerItem, setDrawerItem] = useState<boolean>(false)
   const [favorite, setFavorite] = useState<boolean>(false)
   
-  const {onAddDrawerItem, onRemoveDrawerItem, onAddFavoriteItem, onRemoveFavoriteItem} = useContext(Context)
+  const {onAddDrawerItem, onRemoveDrawerItem, onAddFavoriteItem, onRemoveFavoriteItem} = useContext<ContextType>(Context)
 
   const toogleDrawItem = () => {
     setDrawerItem(!drawerItem)
@@ -31,19 +32,20 @@ const CardItem: FC<PropsType> = ({card}) => {//todo: 1.add classNames;
     setFavorite(!favorite)
     favorite ? onRemoveFavoriteItem(card) : onAddFavoriteItem(card)
   }
-     
+  
+  
   return (
-    <Card className={s.conteiner} sx={{':hover': {transform: 'translateY(-0.5px)', boxShadow: '7px 7px 15px #999'}}}>
+      <Card className={s.conteiner} sx={{':hover': {transform: 'translateY(-0.5px)', boxShadow: '7px 7px 15px #999'}}}>
       <CardContent className={s.content}>
-      <Image  onClick={setFavoriteItem} className={s.like} src={like ? liked : unLike} alt="like" />
-        <Image src= {img} width={133} height={114} alt="card" />
-        <p className={s.title}>{title}</p>
-        <div className={s.titlePrice}>цена</div>
-        <p className={s.price}>{price} uah</p>
-        <Image onClick={toogleDrawItem} className={s.add} src={chacked ? notAdd : add} alt="add" />
-      </CardContent>
-    </Card>
-  );
-};
+          <Image  onClick={setFavoriteItem} className={s.like} src={like ? liked : unLike} alt="like" />
+            <Image src= {img} width={133} height={114} alt="card" />
+            <p className={s.title}>{title}</p>
+            <div className={s.titlePrice}>цена</div>
+            <p className={s.price}>{price} uah</p>
+            <Image onClick={toogleDrawItem} className={s.add} src={chacked ? notAdd : add} alt="add" />
+          </CardContent>
+        </Card>
+  )
+}
 
 export default CardItem;

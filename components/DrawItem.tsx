@@ -4,7 +4,7 @@ import { FC, useContext } from "react";
 import { CardType } from "../types/types";
 import s from "./../styles/DrawItem.module.scss";
 import ClearIcon from "@mui/icons-material/Clear";
-import { Context } from "./AppContext";
+import { Context, ContextType } from "./AppContext";
 
 type PropsType = {
   el: CardType
@@ -12,7 +12,7 @@ type PropsType = {
 
 const DrawItem: FC<PropsType> = ({el}) => {
   const {price, title, img} = el
-  const {onRemoveDrawerItem} = useContext(Context)
+  const {onRemoveDrawerItem} = useContext<ContextType>(Context)
 
   return (
     <Card className={s.conteiner} >

@@ -1,10 +1,7 @@
 import Head from "next/head";
-import type { ReactElement } from 'react';
 import Main from "../components/Main";
-import type { NextPageWithLayout } from './_app';
 
-const Home: NextPageWithLayout = () => {
-
+const Home = () => {
   return  (
         <>
           <Head>
@@ -15,13 +12,5 @@ const Home: NextPageWithLayout = () => {
         </>
       )
   }
-
-Home.getLayout = function getLayout(page: ReactElement) {
-  return (
-    <>
-      {page}
-    </>
-  )
-}
 
 export default Home;
