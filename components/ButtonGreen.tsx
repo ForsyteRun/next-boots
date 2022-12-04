@@ -1,12 +1,16 @@
-import React, { FC } from "react";
+import React, { useContext } from "react";
 import s from "./../styles/ButtonGreen.module.scss";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import { Stack } from "@mui/material";
+import { Context, ContextType } from "./AppContext";
 
-const ButtonGreen: FC = () => {
+const ButtonGreen = () => {
+  
+  const {finishOrders} = useContext<ContextType>(Context)
+
   return (
     <>
-      <button className={s.btn}>
+      <button onClick={()=>finishOrders()} className={s.btn}>
         <Stack direction='row' justifyContent='center'>
           <span style={{alignSelf: 'center'}}>Оформить заказ</span>
           <ArrowRightAltIcon className={s.arrow}/>

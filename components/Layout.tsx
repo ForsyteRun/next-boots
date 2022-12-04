@@ -1,6 +1,6 @@
 import React, { FC, ReactNode, useEffect, useState } from "react";
 import Header from "./Header";
-import { CardType } from "../types/types";
+import { CardType, OrderType } from "../types/types";
 import { Context } from "./AppContext";
 import s from "./../styles/Main.module.scss";
 
@@ -12,6 +12,10 @@ const Layout: FC<Props> = ({ children }: Props) => {
 
   const [item, setItem] = useState<Array<CardType>>([])
   const [sceleton, setSceleton] = useState<boolean>(true)
+  const [shop, setShop] = useState<boolean>(false);
+  const [order, setOrder] = useState<boolean>(false)
+  const [addedOrder, setAddedOrder] = useState<OrderType | null>(null)
+  console.log(addedOrder);
 
   useEffect(() => {
     const initData = async () => {
@@ -89,8 +93,29 @@ const Layout: FC<Props> = ({ children }: Props) => {
       throw new Error(`Error in onRemoveCardDrawer: ${error}`);
     }
   }
+
+  const finishOrders = async () => {
+    try {
+      const el = item.filter((el: CardType)=> el.chacked === true) 
+      const res = await fetch('https://630f1ba6498924524a860c3f.mockapi.io/orders', {
+        method: "POST",
+        body: JSON.stringify(el),
+        headers: {                             
+          "Content-Type": "application/json"   
+        }                                      
+      })
+      const data: OrderType = await res.json()
+      setOrder(prev => !prev)
+      setAddedOrder(data)
+    }
+    catch (error) {
+      throw new Error(`Error in onAddToDrawer: ${error}`);
+    }
+  }
   
-  const value = {item, sceleton, onAddDrawerItem, onRemoveDrawerItem, onAddFavoriteItem, onRemoveFavoriteItem}
+  const value = {item, sceleton, shop, order, addedOrder,
+    onAddDrawerItem, onRemoveDrawerItem, onAddFavoriteItem, 
+    onRemoveFavoriteItem, setShop, setOrder, setAddedOrder, finishOrders}
 
   return (
     <>

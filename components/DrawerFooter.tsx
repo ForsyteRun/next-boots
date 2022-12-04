@@ -1,9 +1,11 @@
-import React, { FC } from "react";
+import React, { FC, useContext } from "react";
 import s from "./../styles/DrawerFooter.module.scss";
 import { Stack } from "@mui/material";
 import ButtonGreen from "./ButtonGreen";
+import { Context, ContextType } from "./AppContext";
 
-const DrawerFooter: FC = () => {
+const DrawerFooter = () => {
+
   return (
     <div className={s.conteiner}>
       <Stack direction='row' sx={{marginBottom: '20px'}}>
@@ -16,7 +18,7 @@ const DrawerFooter: FC = () => {
         <div className={s.doted}></div>
         <span> uah</span>
       </Stack>
-      <ButtonGreen/>
+      <ButtonGreen />
     </div>
   );
 };

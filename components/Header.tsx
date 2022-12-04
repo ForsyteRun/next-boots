@@ -13,8 +13,7 @@ import Link from "next/link";
 
 const Header: FC = () => {  //todo: 1.Stack to components; 2.memo; 3.add classNames to Stack
 
-  const [shop, setShop] = useState<boolean>(false);
-  const { item } = useContext(Context);
+  const { item, shop, setShop, order } = useContext(Context);
 
   const countAddDrawItem = item.filter((el: CardType) => el.chacked === true).length;
   const countAddFavoriteItem = item.filter((el: CardType) => el.like === true).length;
@@ -46,10 +45,14 @@ const Header: FC = () => {  //todo: 1.Stack to components; 2.memo; 3.add classNa
               <FavoriteBorderOutlinedIcon color="primary" />
             </Badge>
           </Link>
-          <AccountCircleOutlinedIcon color="primary" />
+          <Link href='/orders'>
+            <Badge badgeContent={order ? countAddDrawItem : null} color="error">
+              <AccountCircleOutlinedIcon color="primary" />
+            </Badge>
+          </Link>
         </Stack>
       </Stack>
-      <Draw setShop={setShop} shop={shop} />
+      <Draw />
     </header>
   );
 };

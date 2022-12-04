@@ -6,3 +6,8 @@ export type CardType = {
    like: boolean
    chacked: boolean
 }
+
+export type OrderType = {
+   id?: string
+   ''?: CardType
+ }

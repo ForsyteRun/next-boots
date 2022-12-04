@@ -1,9 +1,16 @@
 import {createContext} from 'react';
-import { CardType } from '../types/types';
+import { CardType, OrderType } from '../types/types';
 
 export type ContextType = {
    item: Array<CardType>;
    sceleton: boolean;
+   shop: boolean
+   order: boolean
+   addedOrder: OrderType | null
+   finishOrders: () => void
+   setAddedOrder:  (obj: OrderType | null) => void
+   setOrder: (el: boolean) => void
+   setShop:(el: boolean) => void
    onRemoveDrawerItem: (obj: CardType) => void;
    onAddDrawerItem: (obj: CardType) => void;
    onAddFavoriteItem: (obj: CardType) => void;
@@ -13,6 +20,13 @@ export type ContextType = {
 export const contextDefaultValues: ContextType = {
    item: [],
    sceleton: true,
+   shop: false,
+   order: false,
+   addedOrder: {id: ''},
+   finishOrders: () => {},
+   setAddedOrder: () => {},
+   setOrder: () => {},
+   setShop: () => {},
    onRemoveDrawerItem: () => {},
    onAddDrawerItem: () => {},
    onAddFavoriteItem: () => {},
