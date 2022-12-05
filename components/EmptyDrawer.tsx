@@ -20,7 +20,7 @@ const EmptyDrawer: FC<PropsType> = ({path, title, subTitle, bigSize, btnBack}) =
 
   return (
     <Stack className={bigSize ? s.bigConteiner  : s.conteiner}>
-       <Image src={path} width={bigSize ? 70 : 120} height={bigSize ? 70 : 120} alt='empty drawer' className={s.empty}/>
+       <Image src={path} width={bigSize ? 70 : 100} height={bigSize ? 70 : 120} alt='empty drawer' className={s.empty}/>
        <h3>{title}</h3>
        <h5>{subTitle}</h5>
        <button className={s.btn} onClick={ btnBack ? ()=>router.push('/') : ()=>setShop(false)}>

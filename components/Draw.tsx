@@ -11,7 +11,7 @@ import DrawItem from "./DrawItem";
 import EmptyDrawer from "./EmptyDrawer";
 
 const Draw = () => {//todo: - memo
-  const {item, shop, order, setShop} = useContext<ContextType>(Context)
+  const {item, shop, order,addedOrder, setShop} = useContext<ContextType>(Context)
 
   const itemData = item.find((el: CardType)=> el.chacked === true)
 
@@ -40,31 +40,20 @@ const Draw = () => {//todo: - memo
             >
               <Stack className={classNames(s.content, {[s.contentEmpty]: !itemData || order})} role="presentation" direction='column'>
               <h2 className={s.title}>Корзина</h2>
-              {order 
-              ? <>
-                <Box className={s.itemFalse}>
-                  <EmptyDrawer 
-                  path='/jobDone.png' 
-                  title='Заказ оформлен!' 
-                  subTitle='Ваш заказ #18 скоро будет передан курьерской доставке'/>
-                </Box>
-                  <span style={{opacity: 0}}>1</span>
-                </>
-              : <>
+              <>
                   <Box className={itemData ? s.itemTrue : s.itemFalse}>
                     {itemData
                     ? item.filter((el: CardType)=> el.chacked === true).map((el: CardType) => <DrawItem el={el} key={el.id}/> ) 
                     : <EmptyDrawer 
-                    path='/card/empty.jpg' 
-                    title='Корзина пустая' 
-                    subTitle='Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ'
+                    path={order ? '/orderDone.jpg' : '/card/empty.jpg'} 
+                    title={order ? `Заказ #  принят!` : 'Корзина пустая'} 
+                    subTitle={order ? 'Заказ в обработке' : 'Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ'}
                     />}
                   </Box>
                   {itemData
                   ? <DrawerFooter />
                   : <span style={{opacity: 0}}>1</span>}
                 </>
-              }
               </Stack>
             </SwipeableDrawer>
         </div>

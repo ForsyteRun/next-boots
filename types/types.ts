@@ -8,6 +8,6 @@ export type CardType = {
 }
 
 export type OrderType = {
-   id?: string
-   ''?: CardType
- }
+   order?: string;
+   content?: CardType[];
+ };

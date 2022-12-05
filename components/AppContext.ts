@@ -6,9 +6,9 @@ export type ContextType = {
    sceleton: boolean;
    shop: boolean
    order: boolean
-   addedOrder: OrderType | null
+   addedOrder: Array<OrderType>
+   setAddedOrder: (el: Array<OrderType>) => void
    finishOrders: () => void
-   setAddedOrder:  (obj: OrderType | null) => void
    setOrder: (el: boolean) => void
    setShop:(el: boolean) => void
    onRemoveDrawerItem: (obj: CardType) => void;
@@ -22,9 +22,9 @@ export const contextDefaultValues: ContextType = {
    sceleton: true,
    shop: false,
    order: false,
-   addedOrder: {id: ''},
-   finishOrders: () => {},
+   addedOrder: [],
    setAddedOrder: () => {},
+   finishOrders: () => {},
    setOrder: () => {},
    setShop: () => {},
    onRemoveDrawerItem: () => {},

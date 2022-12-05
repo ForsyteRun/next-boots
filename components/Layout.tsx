@@ -9,123 +9,204 @@ type Props = {
 };
 
 const Layout: FC<Props> = ({ children }: Props) => {
+  //todo: сделать chacked: false весь массив на беке
+ console.log('render layout');
 
-  const [item, setItem] = useState<Array<CardType>>([])
-  const [sceleton, setSceleton] = useState<boolean>(true)
+  const [item, setItem] = useState<Array<CardType>>([]);
+  const [sceleton, setSceleton] = useState<boolean>(true);
   const [shop, setShop] = useState<boolean>(false);
-  const [order, setOrder] = useState<boolean>(false)
-  const [addedOrder, setAddedOrder] = useState<OrderType | null>(null)
+  const [order, setOrder] = useState<boolean>(false);
+  const [addedOrder, setAddedOrder] = useState<Array<OrderType>>([]);
   console.log(addedOrder);
 
   useEffect(() => {
     const initData = async () => {
       try {
-        const res: Array<CardType> = await (await fetch('https://630f1ba6498924524a860c3f.mockapi.io/users')).json()
-        setItem(res) 
-        setSceleton(false)
+
+        //инициализация стартовой страницы. Загрузка карточек товара по дефолту
+        const res: Array<CardType> = await (
+          await fetch("https://630f1ba6498924524a860c3f.mockapi.io/users")
+        ).json();
+        setItem(res);
+        setSceleton(false);
+
+        //загрузка ордеров после подтверждения о покупке
+        const resAddedOrders: Array<OrderType> = await (
+          await fetch("https://630f1ba6498924524a860c3f.mockapi.io/orders")
+          ).json();
+          setAddedOrder(resAddedOrders)
       } catch (error) {
         throw new Error(`Error in: ${error}`);
       }
-    }
-    initData()
-  }, [])
-  
+    };
+    initData();
+  }, []);
+
   const onAddDrawerItem = async (obj: CardType) => {
     try {
-      const res = await fetch(`https://630f1ba6498924524a860c3f.mockapi.io/users/${obj.id}`, {
-        method: 'PUT',
-        body: JSON.stringify({chacked: true}),
-        headers: {
-          'Content-Type': 'application/json'
+      const res = await fetch(
+        `https://630f1ba6498924524a860c3f.mockapi.io/users/${obj.id}`,
+        {
+          method: "PUT",
+          body: JSON.stringify({ chacked: true }),
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
-      })
-      const data: CardType = await res.json()
-      setItem(prev => prev.map((el: CardType)=> el.id === data.id ? Object.assign({}, el, {chacked: true}) : el))
+      );
+      const data: CardType = await res.json();
+      setItem((prev) =>
+        prev.map((el: CardType) =>
+          el.id === data.id ? Object.assign({}, el, { chacked: true }) : el
+        )
+      );
     } catch (error) {
       throw new Error(`Error in onAddToDrawer: ${error}`);
     }
-  }
-  
+  };
+
   const onRemoveDrawerItem = async (obj: CardType) => {
     try {
-      const res = await fetch(`https://630f1ba6498924524a860c3f.mockapi.io/users/${obj.id}`, {
-        method: 'PUT',
-        body: JSON.stringify({chacked: false}),
-        headers: {
-          'Content-Type': 'application/json'
+      const res = await fetch(
+        `https://630f1ba6498924524a860c3f.mockapi.io/users/${obj.id}`,
+        {
+          method: "PUT",
+          body: JSON.stringify({ chacked: false }),
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
-      })
-      const data: CardType = await res.json()
-      setItem(prev => prev.map((el: CardType)=> el.id === data.id ? Object.assign({}, el, {chacked: false}) : el))
+      );
+      const data: CardType = await res.json();
+      setItem((prev) =>
+        prev.map((el: CardType) =>
+          el.id === data.id ? Object.assign({}, el, { chacked: false }) : el
+        )
+      );
     } catch (error) {
       throw new Error(`Error in onRemoveCardDrawer: ${error}`);
     }
-  }
-  
+  };
+
   const onAddFavoriteItem = async (obj: CardType) => {
     try {
-      const res = await fetch(`https://630f1ba6498924524a860c3f.mockapi.io/users/${obj.id}`, {
-        method: 'PUT',
-        body: JSON.stringify({like: true}),
-        headers: {
-          'Content-Type': 'application/json'
+      const res = await fetch(
+        `https://630f1ba6498924524a860c3f.mockapi.io/users/${obj.id}`,
+        {
+          method: "PUT",
+          body: JSON.stringify({ like: true }),
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
-      })
-      const data: CardType = await res.json()
-      setItem(prev => prev.map((el: CardType)=> el.id === data.id ? Object.assign({}, el, {like: true}) : el))
+      );
+      const data: CardType = await res.json();
+      setItem((prev) =>
+        prev.map((el: CardType) =>
+          el.id === data.id ? Object.assign({}, el, { like: true }) : el
+        )
+      );
     } catch (error) {
       throw new Error(`Error in onAddToDrawer: ${error}`);
     }
-  }
+  };
 
   const onRemoveFavoriteItem = async (obj: CardType) => {
     try {
-      const res = await fetch(`https://630f1ba6498924524a860c3f.mockapi.io/users/${obj.id}`, {
-        method: 'PUT',
-        body: JSON.stringify({like: false}),
-        headers: {
-          'Content-Type': 'application/json'
+      const res = await fetch(
+        `https://630f1ba6498924524a860c3f.mockapi.io/users/${obj.id}`,
+        {
+          method: "PUT",
+          body: JSON.stringify({ like: false }),
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
-      })
-      const data: CardType = await res.json()
-      setItem(prev => prev.map((el: CardType)=> el.id === data.id ? Object.assign({}, el, {like: false}) : el))
+      );
+      const data: CardType = await res.json();
+      setItem((prev) =>
+        prev.map((el: CardType) =>
+          el.id === data.id ? Object.assign({}, el, { like: false }) : el
+        )
+      );
     } catch (error) {
       throw new Error(`Error in onRemoveCardDrawer: ${error}`);
     }
-  }
+  };
 
   const finishOrders = async () => {
     try {
-      const el = item.filter((el: CardType)=> el.chacked === true) 
-      const res = await fetch('https://630f1ba6498924524a860c3f.mockapi.io/orders', {
-        method: "POST",
-        body: JSON.stringify(el),
-        headers: {                             
-          "Content-Type": "application/json"   
-        }                                      
-      })
-      const data: OrderType = await res.json()
-      setOrder(prev => !prev)
-      setAddedOrder(data)
-    }
-    catch (error) {
+      const content = item.filter((el: CardType) => el.chacked === true);
+
+      //В новый массив на МockApi добавляем объект с id
+      //и ключём content (это массив отфильтрованных данных по флагу chacked: true)
+      const resOrders = await fetch(
+        `https://630f1ba6498924524a860c3f.mockapi.io/orders`,
+        {
+          method: "POST",
+          body: JSON.stringify({ content }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const dataOrders: OrderType = await resOrders.json();
+      setAddedOrder(prev => [...prev, dataOrders])
+
+      //после подтверждения заказа меняем флаг chacked: true на chacked: false
+      //в инит массиве у каждого выбраного элемента массива. Перебор по циклу
+      for (let i of content) {
+        await fetch(
+          `https://630f1ba6498924524a860c3f.mockapi.io/users/${i.id}`,
+          {
+            method: "PUT",
+            body: JSON.stringify({ chacked: false }),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+      }
+
+      // setAddedOrder(prev =>  console.log(prev))
+      //возвращаем основной массив с актуальными данными, тоесть с флагом chacked: false,
+      //так как элемениы с chacked: true добавлены в новый массив addedOrder в state
+      //и  на МockApi в объект orders
+      const res = await fetch(
+        `https://630f1ba6498924524a860c3f.mockapi.io/users`
+      );
+      const data = await res.json();
+      setOrder((prev) => !prev);
+      setItem(data);
+    } catch (error) {
       throw new Error(`Error in onAddToDrawer: ${error}`);
     }
-  }
-  
-  const value = {item, sceleton, shop, order, addedOrder,
-    onAddDrawerItem, onRemoveDrawerItem, onAddFavoriteItem, 
-    onRemoveFavoriteItem, setShop, setOrder, setAddedOrder, finishOrders}
+  };
+
+  const value = {
+    item,
+    sceleton,
+    shop,
+    order,
+    addedOrder,
+    setAddedOrder,
+    onAddDrawerItem,
+    onRemoveDrawerItem,
+    onAddFavoriteItem,
+    onRemoveFavoriteItem,
+    setShop,
+    setOrder,
+    finishOrders,
+  };
 
   return (
     <>
-    <Context.Provider value={value}>
-      <Header />
-        <main className={s.conteiner}>
-            {children}
-        </main>
-    </Context.Provider>
+      <Context.Provider value={value}>
+        <Header />
+        <main className={s.conteiner}>{children}</main>
+      </Context.Provider>
     </>
-  )}
+  );
+};
 
 export default Layout;

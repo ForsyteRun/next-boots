@@ -17,6 +17,7 @@ const Header: FC = () => {  //todo: 1.Stack to components; 2.memo; 3.add classNa
 
   const countAddDrawItem = item.filter((el: CardType) => el.chacked === true).length;
   const countAddFavoriteItem = item.filter((el: CardType) => el.like === true).length;
+  // const countAddOrderItem = item.filter((el: CardType) => el.isOrder === true).length;
 
   return (
     <header>
@@ -46,7 +47,7 @@ const Header: FC = () => {  //todo: 1.Stack to components; 2.memo; 3.add classNa
             </Badge>
           </Link>
           <Link href='/orders'>
-            <Badge badgeContent={order ? countAddDrawItem : null} color="error">
+            <Badge badgeContent={10} color="error">
               <AccountCircleOutlinedIcon color="primary" />
             </Badge>
           </Link>
