@@ -7,6 +7,8 @@ export type ContextType = {
    shop: boolean
    order: boolean
    addedOrder: Array<OrderType>
+   loading: boolean
+   disBtn: boolean
    setAddedOrder: (el: Array<OrderType>) => void
    finishOrders: () => void
    setOrder: (el: boolean) => void
@@ -23,6 +25,8 @@ export const contextDefaultValues: ContextType = {
    shop: false,
    order: false,
    addedOrder: [],
+   loading: true,
+   disBtn: false,
    setAddedOrder: () => {},
    finishOrders: () => {},
    setOrder: () => {},

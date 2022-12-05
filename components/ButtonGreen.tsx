@@ -5,12 +5,11 @@ import { Stack } from "@mui/material";
 import { Context, ContextType } from "./AppContext";
 
 const ButtonGreen = () => {
+  const {finishOrders, disBtn} = useContext<ContextType>(Context)
   
-  const {finishOrders} = useContext<ContextType>(Context)
-
   return (
     <>
-      <button onClick={()=>finishOrders()} className={s.btn}>
+      <button onClick={()=>finishOrders()} className={s.btn} disabled = {disBtn}>
         <Stack direction='row' justifyContent='center'>
           <span style={{alignSelf: 'center'}}>Оформить заказ</span>
           <ArrowRightAltIcon className={s.arrow}/>

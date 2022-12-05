@@ -12,9 +12,10 @@ import { Context, ContextType } from "./AppContext";
 
 type PropsType = {
   card: CardType
+  disBtn?: boolean
 }
 
-const CardItem: FC<PropsType> = ({card}) => {
+const CardItem: FC<PropsType> = ({card, disBtn = false}) => {
   //todo: 1.add classNames; 2. два раза нажимать для смены toogleDrawItem и setFavoriteItem
   const {chacked, like, img, title, price} = card;
   
@@ -42,7 +43,9 @@ const CardItem: FC<PropsType> = ({card}) => {
             <p className={s.title}>{title}</p>
             <div className={s.titlePrice}>цена</div>
             <p className={s.price}>{price} uah</p>
-            <Image onClick={toogleDrawItem} className={s.add} src={chacked ? notAdd : add} alt="add" />
+             {
+              disBtn || <Image onClick={toogleDrawItem} className={s.add} src={chacked ? notAdd : add} alt="add" />
+             }
           </CardContent>
         </Card>
   )

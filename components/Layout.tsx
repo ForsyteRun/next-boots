@@ -9,15 +9,14 @@ type Props = {
 };
 
 const Layout: FC<Props> = ({ children }: Props) => {
-  //todo: сделать chacked: false весь массив на беке
- console.log('render layout');
 
   const [item, setItem] = useState<Array<CardType>>([]);
   const [sceleton, setSceleton] = useState<boolean>(true);
   const [shop, setShop] = useState<boolean>(false);
   const [order, setOrder] = useState<boolean>(false);
   const [addedOrder, setAddedOrder] = useState<Array<OrderType>>([]);
-  console.log(addedOrder);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [disBtn, setDisBtn] = useState<boolean>(false);
 
   useEffect(() => {
     const initData = async () => {
@@ -30,11 +29,13 @@ const Layout: FC<Props> = ({ children }: Props) => {
         setItem(res);
         setSceleton(false);
 
-        //загрузка ордеров после подтверждения о покупке
-        const resAddedOrders: Array<OrderType> = await (
-          await fetch("https://630f1ba6498924524a860c3f.mockapi.io/orders")
+        //загрузка init ордеров после подтверждения о покупке
+        const resAddedOrders: Array<OrderType> = 
+        await (await fetch("https://630f1ba6498924524a860c3f.mockapi.io/orders")
           ).json();
           setAddedOrder(resAddedOrders)
+          setOrder(prev => prev = true)
+          setLoading(prev => prev = false)
       } catch (error) {
         throw new Error(`Error in: ${error}`);
       }
@@ -140,6 +141,7 @@ const Layout: FC<Props> = ({ children }: Props) => {
 
       //В новый массив на МockApi добавляем объект с id
       //и ключём content (это массив отфильтрованных данных по флагу chacked: true)
+      setDisBtn(prev => !prev)
       const resOrders = await fetch(
         `https://630f1ba6498924524a860c3f.mockapi.io/orders`,
         {
@@ -149,12 +151,12 @@ const Layout: FC<Props> = ({ children }: Props) => {
             "Content-Type": "application/json",
           },
         }
-      );
-      const dataOrders: OrderType = await resOrders.json();
-      setAddedOrder(prev => [...prev, dataOrders])
-
+        );
+        const dataOrders: OrderType = await resOrders.json();
+        setAddedOrder(prev => [...prev, dataOrders])
+        
       //после подтверждения заказа меняем флаг chacked: true на chacked: false
-      //в инит массиве у каждого выбраного элемента массива. Перебор по циклу
+      //в init массиве у каждого выбраного элемента массива. Перебор по циклу
       for (let i of content) {
         await fetch(
           `https://630f1ba6498924524a860c3f.mockapi.io/users/${i.id}`,
@@ -168,7 +170,6 @@ const Layout: FC<Props> = ({ children }: Props) => {
         );
       }
 
-      // setAddedOrder(prev =>  console.log(prev))
       //возвращаем основной массив с актуальными данными, тоесть с флагом chacked: false,
       //так как элемениы с chacked: true добавлены в новый массив addedOrder в state
       //и  на МockApi в объект orders
@@ -181,6 +182,7 @@ const Layout: FC<Props> = ({ children }: Props) => {
     } catch (error) {
       throw new Error(`Error in onAddToDrawer: ${error}`);
     }
+    setDisBtn(prev => !prev)
   };
 
   const value = {
@@ -189,6 +191,8 @@ const Layout: FC<Props> = ({ children }: Props) => {
     shop,
     order,
     addedOrder,
+    loading,
+    disBtn,
     setAddedOrder,
     onAddDrawerItem,
     onRemoveDrawerItem,

@@ -45,14 +45,14 @@ const Draw = () => {//todo: - memo
                     {itemData
                     ? item.filter((el: CardType)=> el.chacked === true).map((el: CardType) => <DrawItem el={el} key={el.id}/> ) 
                     : <EmptyDrawer 
-                    path={order ? '/orderDone.jpg' : '/card/empty.jpg'} 
-                    title={order ? `Заказ #  принят!` : 'Корзина пустая'} 
-                    subTitle={order ? 'Заказ в обработке' : 'Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ'}
+                    path={order ?  '/card/empty.jpg' : '/orderDone.jpg'} 
+                    title={order ?  'Корзина пустая' : `Заказ #  принят!`} 
+                    subTitle={order ? 'Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ' : 'Заказ в обработке' }
                     />}
                   </Box>
-                  {itemData
-                  ? <DrawerFooter />
-                  : <span style={{opacity: 0}}>1</span>}
+                    {itemData
+                    ? <DrawerFooter />
+                    : <span style={{opacity: 0}}>1</span>}
                 </>
               </Stack>
             </SwipeableDrawer>
