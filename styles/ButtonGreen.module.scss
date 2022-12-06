@@ -26,10 +26,40 @@ $white: #FFFFFF;
       position: relative;
       right: -35px;
    }
+   &:hover {
+      background-color: $bgButton;
+      .arrow {
+         animation: arrowBtn 1s ease-in-out infinite both;
+      }
+   }
    &:disabled {
+      animation: btn-animation .8s ease-in-out infinite;
       background-color: #999;
-      cursor: none;
+      cursor: default;
    }
 }
 
+@keyframes btn-animation {
+   0% {
+     opacity: 1; 
+   }
+   50% {
+      opacity: .5;
+   }
+   100% {
+      opacity: 1;
+   }
+}
+
+@keyframes arrowBtn {
+   0% {
+         right: -20px;
+   }
+   50% {
+         right: -45px;
+   }
+   100% {
+         right: -55px;
+   }
+}
 

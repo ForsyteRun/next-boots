@@ -34,7 +34,7 @@ const Layout: FC<Props> = ({ children }: Props) => {
         await (await fetch("https://630f1ba6498924524a860c3f.mockapi.io/orders")
           ).json();
           setAddedOrder(resAddedOrders)
-          setOrder(prev => prev = true)
+          addedOrder.length && setOrder(prev => prev = true)
           setLoading(prev => prev = false)
       } catch (error) {
         throw new Error(`Error in: ${error}`);
@@ -156,7 +156,8 @@ const Layout: FC<Props> = ({ children }: Props) => {
         setAddedOrder(prev => [...prev, dataOrders])
         
       //после подтверждения заказа меняем флаг chacked: true на chacked: false
-      //в init массиве у каждого выбраного элемента массива. Перебор по циклу
+      //в init массиве у каждого выбраного элемента массива. Перебор по циклу for...
+      //если через ForEach, то await не будет ожидатся
       for (let i of content) {
         await fetch(
           `https://630f1ba6498924524a860c3f.mockapi.io/users/${i.id}`,
@@ -177,7 +178,7 @@ const Layout: FC<Props> = ({ children }: Props) => {
         `https://630f1ba6498924524a860c3f.mockapi.io/users`
       );
       const data = await res.json();
-      setOrder((prev) => !prev);
+      setOrder(prev => prev = true);
       setItem(data);
     } catch (error) {
       throw new Error(`Error in onAddToDrawer: ${error}`);

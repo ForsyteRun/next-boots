@@ -7,17 +7,18 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import s from "./../styles/Header.module.scss";
 import Draw from "./Draw";
-import { CardType } from "../types/types";
+import { CardType, OrderType } from "../types/types";
 import { Context } from "./AppContext";
 import Link from "next/link";
+import { useDrawer } from "../hooks/useDrawer";
 
 const Header: FC = () => {  //todo: 1.Stack to components; 2.memo; 3.add classNames to Stack
-
-  const { item, shop, setShop, order, addedOrder } = useContext(Context);
+  const {totalPrice} = useDrawer()
+  const { item, shop, setShop, addedOrder } = useContext(Context);
 
   const countAddDrawItem = item.filter((el: CardType) => el.chacked === true).length;
   const countAddFavoriteItem = item.filter((el: CardType) => el.like === true).length;
-  const countAddOrderItem = addedOrder.filter((el: any) => !!el.order).length;
+  const countAddOrderItem = addedOrder.filter((el: OrderType) => !!el.order).length;
 
   return (
     <header>
@@ -39,7 +40,7 @@ const Header: FC = () => {  //todo: 1.Stack to components; 2.memo; 3.add classNa
                 />
               </Badge>
             </div>
-            <span style={{ marginLeft: "15px" }}>1205uah</span>
+            <span style={{ marginLeft: "15px" }}>{ totalPrice > 0 && `${totalPrice}uah`}</span>
           </Stack>
           <Link href="/favorites">
             <Badge badgeContent={countAddFavoriteItem} color="error">
