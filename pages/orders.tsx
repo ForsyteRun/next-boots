@@ -16,30 +16,27 @@ const Orders = () => {
          <title>Orders</title>
          <meta name="description" content="Orders" />
       </Head>
-      {loading 
-      ? <Stack justifyContent='center' alignItems='center' sx={{height: '100%'}}>
+      {/* крутилка перед загрузкой */}
+      {loading && 
+        <Stack justifyContent='center' alignItems='center' sx={{height: '100%'}}>
           <CircularProgress size={100}/> 
         </Stack>
-      : (addedOrder.length 
-        ? (
+      }
+      {addedOrder.length > 0 
+      ? //подъём массива в массиве на уровень вверх
         <Stack direction="row" flexWrap="wrap" gap="20px">
-          {addedOrder.map((el: OrderType) => (
-            <div key={el.order}>
-              {el.content?.map((card: CardType) => (
-                <CardItem card={card} key={card.id} disBtn={true} />
-              ))}
-            </div>
-          ))}
-        </Stack>) 
-        : (
-        <EmptyDrawer
+          {addedOrder.map((el:OrderType) => el.content).flat().map((obj: CardType) => 
+            <CardItem card={obj} key={obj.id} disBtn={true} />)
+          }
+        </Stack>
+      : <EmptyDrawer
           btnBack
           bigSize
           path="/sleepSmile.png"
           title="У вас нет заказов"
           subTitle="Вы нищеброд? Оформите хотя бы один заказ."
         />
-      ))}
+      }
     </>
   );
 };

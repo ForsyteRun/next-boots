@@ -8,6 +8,7 @@ export type CardType = {
 }
 
 export type OrderType = {
-   order?: string;
-   content?: CardType[];
+   obj: OrderType
+   order: string;
+   content: CardType[];
  };
