@@ -17,27 +17,29 @@ const Layout: FC<Props> = ({ children }: Props) => {
   const [addedOrder, setAddedOrder] = useState<Array<OrderType>>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [disBtn, setDisBtn] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(1)
+  const [limitCards, setLimitCards] = useState<number>(4)
+  const [totalCards, setTotalCards] = useState<number>(0)
 
   useEffect(() => {
     const initData = async () => {
       try {
-
-        //инициализация стартовой страницы. Загрузка карточек товара по дефолту
+        //инициализация стартовой страницы. Загрузка карточек товара
         const res: Array<CardType> = await (
-          await fetch("https://630f1ba6498924524a860c3f.mockapi.io/users?page=1&limit=8")
+          await fetch(`https://630f1ba6498924524a860c3f.mockapi.io/users?page=1&limit=2`)
         ).json();
         setItem(res);
         setSceleton(false);
 
         //загрузка init ордеров после подтверждения о покупке
         const resAddedOrders: Array<OrderType> = 
-        await (await fetch("https://630f1ba6498924524a860c3f.mockapi.io/orders?page=1&limit=1")
+        await (await fetch("https://630f1ba6498924524a860c3f.mockapi.io/orders")
           ).json();
           setAddedOrder(resAddedOrders)
           addedOrder.length && setOrder(prev => prev = true)
           setLoading(prev => prev = false)
       } catch (error) {
-        throw new Error(`Error in: ${error}`);
+        throw new Error(`Error in init useEffect: ${error}`);
       }
     };
     initData();
@@ -194,6 +196,7 @@ const Layout: FC<Props> = ({ children }: Props) => {
     addedOrder,
     loading,
     disBtn,
+    totalCards,
     setAddedOrder,
     onAddDrawerItem,
     onRemoveDrawerItem,

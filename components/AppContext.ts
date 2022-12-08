@@ -9,6 +9,7 @@ export type ContextType = {
    addedOrder: Array<OrderType>
    loading: boolean
    disBtn: boolean
+   totalCards: number
    setAddedOrder: (el: Array<OrderType>) => void
    finishOrders: () => void
    setOrder: (el: boolean) => void
@@ -27,6 +28,7 @@ export const contextDefaultValues: ContextType = {
    addedOrder: [],
    loading: true,
    disBtn: false,
+   totalCards: 0,
    setAddedOrder: () => {},
    finishOrders: () => {},
    setOrder: () => {},
