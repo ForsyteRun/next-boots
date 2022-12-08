@@ -38,16 +38,12 @@ const CardItem: FC<PropsType> = ({card, disBtn = false}) => {
   return (
       <Card className={s.conteiner} sx={{':hover': {transform: 'translateY(-0.5px)', boxShadow: '7px 7px 15px #999'}}}>
       <CardContent className={s.content}>
-            {
-             disBtn || <Image  onClick={setFavoriteItem} className={s.like} src={like ? liked : unLike} alt="like" />
-            }
+            {disBtn || <Image  onClick={setFavoriteItem} className={s.like} src={like ? liked : unLike} alt="like" />}
             <Image src= {img} width={133} height={114} alt="card" />
             <p className={s.title}>{title}</p>
             <div className={s.titlePrice}>цена</div>
             <p className={s.price}>{price} uah</p>
-             {
-              disBtn || <Image onClick={toogleDrawItem} className={s.add} src={chacked ? notAdd : add} alt="add" />
-             }
+             {disBtn || <Image onClick={toogleDrawItem} className={s.add} src={chacked ? notAdd : add} alt="add" />}
           </CardContent>
         </Card>
   )

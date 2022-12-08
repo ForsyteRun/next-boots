@@ -24,14 +24,14 @@ const Layout: FC<Props> = ({ children }: Props) => {
 
         //инициализация стартовой страницы. Загрузка карточек товара по дефолту
         const res: Array<CardType> = await (
-          await fetch("https://630f1ba6498924524a860c3f.mockapi.io/users")
+          await fetch("https://630f1ba6498924524a860c3f.mockapi.io/users?page=1&limit=8")
         ).json();
         setItem(res);
         setSceleton(false);
 
         //загрузка init ордеров после подтверждения о покупке
         const resAddedOrders: Array<OrderType> = 
-        await (await fetch("https://630f1ba6498924524a860c3f.mockapi.io/orders")
+        await (await fetch("https://630f1ba6498924524a860c3f.mockapi.io/orders?page=1&limit=1")
           ).json();
           setAddedOrder(resAddedOrders)
           addedOrder.length && setOrder(prev => prev = true)
