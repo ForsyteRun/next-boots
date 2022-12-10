@@ -3,6 +3,7 @@ import { CardType, OrderType } from '../types/types';
 
 export type ContextType = {
    item: Array<CardType>;
+   itemPagi: Array<CardType>;
    sceleton: boolean;
    shop: boolean
    order: boolean
@@ -10,6 +11,9 @@ export type ContextType = {
    loading: boolean
    disBtn: boolean
    totalCards: number
+   setTotalCards: (el: number) => void
+   setItemPagi: (arr:  Array<CardType>) => void 
+   setItem: (arr:  Array<CardType>) => void
    setAddedOrder: (el: Array<OrderType>) => void
    finishOrders: () => void
    setOrder: (el: boolean) => void
@@ -28,7 +32,11 @@ export const contextDefaultValues: ContextType = {
    addedOrder: [],
    loading: true,
    disBtn: false,
+   itemPagi: [],
    totalCards: 0,
+   setTotalCards: () => {},
+   setItemPagi: () => {},
+   setItem: () => {},
    setAddedOrder: () => {},
    finishOrders: () => {},
    setOrder: () => {},

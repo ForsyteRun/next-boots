@@ -3,6 +3,7 @@ import Header from "./Header";
 import { CardType, OrderType } from "../types/types";
 import { Context } from "./AppContext";
 import s from "./../styles/Main.module.scss";
+import { toggleAddBtn, toggleFavoriteBtn } from "../common/toogleBtn";
 
 type Props = {
   children: ReactNode;
@@ -11,14 +12,13 @@ type Props = {
 const Layout: FC<Props> = ({ children }: Props) => {
 
   const [item, setItem] = useState<Array<CardType>>([]);
+  const [itemPagi, setItemPagi] = useState<Array<CardType>>([]);
   const [sceleton, setSceleton] = useState<boolean>(true);
   const [shop, setShop] = useState<boolean>(false);
   const [order, setOrder] = useState<boolean>(false);
   const [addedOrder, setAddedOrder] = useState<Array<OrderType>>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [disBtn, setDisBtn] = useState<boolean>(false);
-  const [page, setPage] = useState<number>(1)
-  const [limitCards, setLimitCards] = useState<number>(4)
   const [totalCards, setTotalCards] = useState<number>(0)
 
   useEffect(() => {
@@ -26,10 +26,18 @@ const Layout: FC<Props> = ({ children }: Props) => {
       try {
         //инициализация стартовой страницы. Загрузка карточек товара
         const res: Array<CardType> = await (
-          await fetch(`https://630f1ba6498924524a860c3f.mockapi.io/users?page=1&limit=2`)
+          await fetch(`https://630f1ba6498924524a860c3f.mockapi.io/users`)
         ).json();
         setItem(res);
         setSceleton(false);
+        setTotalCards(res.length - 1)
+
+        const resAPI: Array<CardType> = await (
+          await fetch(`https://630f1ba6498924524a860c3f.mockapi.io/users?page=1&limit=2`)
+        ).json();
+        setItemPagi(resAPI)
+        // setItem(res);
+        // setSceleton(false);
 
         //загрузка init ордеров после подтверждения о покупке
         const resAddedOrders: Array<OrderType> = 
@@ -47,6 +55,7 @@ const Layout: FC<Props> = ({ children }: Props) => {
 
   const onAddDrawerItem = async (obj: CardType) => {
     try {
+
       const res = await fetch(
         `https://630f1ba6498924524a860c3f.mockapi.io/users/${obj.id}`,
         {
@@ -58,11 +67,12 @@ const Layout: FC<Props> = ({ children }: Props) => {
         }
       );
       const data: CardType = await res.json();
-      setItem((prev) =>
-        prev.map((el: CardType) =>
-          el.id === data.id ? Object.assign({}, el, { chacked: true }) : el
-        )
-      );
+      
+      const mainArr = toggleAddBtn(item, data, true)
+      const secArr = toggleAddBtn(itemPagi, data, true)
+      
+      setItem(mainArr.changeCheck);
+      setItemPagi(secArr.changeCheck);
     } catch (error) {
       throw new Error(`Error in onAddToDrawer: ${error}`);
     }
@@ -81,11 +91,13 @@ const Layout: FC<Props> = ({ children }: Props) => {
         }
       );
       const data: CardType = await res.json();
-      setItem((prev) =>
-        prev.map((el: CardType) =>
-          el.id === data.id ? Object.assign({}, el, { chacked: false }) : el
-        )
-      );
+
+      const mainArr = toggleAddBtn(item, data, false)
+      const secArr = toggleAddBtn(itemPagi, data, false)
+      
+      setItem(mainArr.changeCheck);
+      setItemPagi(secArr.changeCheck);
+  
     } catch (error) {
       throw new Error(`Error in onRemoveCardDrawer: ${error}`);
     }
@@ -104,11 +116,13 @@ const Layout: FC<Props> = ({ children }: Props) => {
         }
       );
       const data: CardType = await res.json();
-      setItem((prev) =>
-        prev.map((el: CardType) =>
-          el.id === data.id ? Object.assign({}, el, { like: true }) : el
-        )
-      );
+
+      const mainArr = toggleFavoriteBtn(item, data, true)
+      const secArr = toggleFavoriteBtn(itemPagi, data, true)
+      
+      setItem(mainArr.favoriteCheck);
+      setItemPagi(secArr.favoriteCheck);
+
     } catch (error) {
       throw new Error(`Error in onAddToDrawer: ${error}`);
     }
@@ -127,11 +141,13 @@ const Layout: FC<Props> = ({ children }: Props) => {
         }
       );
       const data: CardType = await res.json();
-      setItem((prev) =>
-        prev.map((el: CardType) =>
-          el.id === data.id ? Object.assign({}, el, { like: false }) : el
-        )
-      );
+
+      const mainArr = toggleFavoriteBtn(item, data, false)
+      const secArr = toggleFavoriteBtn(itemPagi, data, false)
+      
+      setItem(mainArr.favoriteCheck);
+      setItemPagi(secArr.favoriteCheck);
+      
     } catch (error) {
       throw new Error(`Error in onRemoveCardDrawer: ${error}`);
     }
@@ -140,7 +156,7 @@ const Layout: FC<Props> = ({ children }: Props) => {
   const finishOrders = async () => {
     try {
       const content = item.filter((el: CardType) => el.chacked === true);
-
+      
       //В новый массив на МockApi добавляем объект с id
       //и ключём content (это массив отфильтрованных данных по флагу chacked: true)
       setDisBtn(prev => !prev)
@@ -196,7 +212,11 @@ const Layout: FC<Props> = ({ children }: Props) => {
     addedOrder,
     loading,
     disBtn,
+    itemPagi,
     totalCards,
+    setItem,
+    setItemPagi,
+    setTotalCards,
     setAddedOrder,
     onAddDrawerItem,
     onRemoveDrawerItem,

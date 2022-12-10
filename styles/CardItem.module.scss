@@ -50,4 +50,8 @@ $border: #EAEAEA;
          top: 78%;
       }
    }
+   &:hover {
+      transform: translateY(-0.5px);
+      box-shadow: 7px 7px 15px #999;
+   }
 }

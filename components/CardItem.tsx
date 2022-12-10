@@ -16,34 +16,36 @@ type PropsType = {
 }
 
 const CardItem: FC<PropsType> = ({card, disBtn = false}) => {
-  //todo: 1.add classNames; 2. два раза нажимать для смены toogleDrawItem и setFavoriteItem
   const {chacked, like, img, title, price} = card;
-  
-  const [drawerItem, setDrawerItem] = useState<boolean>(false)
-  const [favorite, setFavorite] = useState<boolean>(false)
+
+  console.log(`${card.id}, chacked = ${chacked}, like = ${like}`)
+
+  const [drawerItem, setDrawerItem] = useState<boolean>(!chacked)
+  const [favorite, setFavorite] = useState<boolean>(!like)
   
   const {onAddDrawerItem, onRemoveDrawerItem, onAddFavoriteItem, onRemoveFavoriteItem} = useContext<ContextType>(Context)
 
+  //toogle btn addToCard in back and front
   const toogleDrawItem = () => {
-    setDrawerItem(!drawerItem)
-    drawerItem ? onRemoveDrawerItem(card) : onAddDrawerItem(card)
+    setDrawerItem(prev => !prev)
+    drawerItem ? onAddDrawerItem(card) : onRemoveDrawerItem(card)
   }
 
+  //toogle btn addToFavorite in back and front
   const setFavoriteItem = () => {
-    setFavorite(!favorite)
-    favorite ? onRemoveFavoriteItem(card) : onAddFavoriteItem(card)
+    setFavorite(prev => !prev)
+    favorite ? onAddFavoriteItem(card) : onRemoveFavoriteItem(card)
   }
   
-  
   return (
-      <Card className={s.conteiner} sx={{':hover': {transform: 'translateY(-0.5px)', boxShadow: '7px 7px 15px #999'}}}>
+      <Card className={s.conteiner}>
       <CardContent className={s.content}>
             {disBtn || <Image  onClick={setFavoriteItem} className={s.like} src={like ? liked : unLike} alt="like" />}
             <Image src= {img} width={133} height={114} alt="card" />
             <p className={s.title}>{title}</p>
             <div className={s.titlePrice}>цена</div>
             <p className={s.price}>{price} uah</p>
-             {disBtn || <Image onClick={toogleDrawItem} className={s.add} src={chacked ? notAdd : add} alt="add" />}
+             {disBtn || <Image onClick={toogleDrawItem} className={s.add} src={chacked ? add : notAdd} alt="add" />}
           </CardContent>
         </Card>
   )
