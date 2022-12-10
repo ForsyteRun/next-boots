@@ -14,6 +14,7 @@ const Main =  () => {
   const {sceleton, itemPagi, setItemPagi, totalCards, limitPageInWindow} = useContext<ContextType>(Context)
   
   useEffect(() => {
+    
     //get total count cards
     const changePage = async () => {
     const resTotalCards = await fetch(instansMockaAPI + `users?page=${page}&limit=${limitPageInWindow}`)
