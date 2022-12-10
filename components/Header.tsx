@@ -1,16 +1,16 @@
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { Badge, Stack } from "@mui/material";
 import Image from "next/image";
-import { FC, useContext, useState } from "react";
-import logo from "./../public/logo.png";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import s from "./../styles/Header.module.scss";
-import Draw from "./Draw";
-import { CardType, OrderType } from "../types/types";
-import { Context } from "./AppContext";
 import Link from "next/link";
+import { FC, useContext } from "react";
 import { useDrawer } from "../hooks/useDrawer";
+import { CardType, OrderType } from "../types/types";
+import logo from "./../public/logo.png";
+import s from "./../styles/Header.module.scss";
+import { Context } from "./AppContext";
+import Draw from "./Draw";
 
 const Header: FC = () => {  //todo: 1.Stack to components; 2.memo; 3.add classNames to Stack
   const {totalPrice} = useDrawer()
