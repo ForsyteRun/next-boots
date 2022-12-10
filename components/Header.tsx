@@ -27,7 +27,7 @@ const Header: FC = () => {  //todo: 1.Stack to components; 2.memo; 3.add classNa
           <Image src={logo} alt="logo" />
         </Link>
         <Stack className={s.headerCenter}>
-          <h3 className={s.title}>REACT SNEAKERS</h3>
+          <h3 className={s.title}>React Boots</h3>
           <div className={s.subTitle}>Магазин лучших кроссовок</div>
         </Stack>
         <Stack direction={"row"} justifyContent={"space-between"} width="196px">

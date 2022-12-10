@@ -8,6 +8,7 @@ export const toggleAddBtn = (arr: Array<CardType>, data: CardType, bool: boolean
      return {changeCheck}
 }
 
+//function return object with array of cards whith like in boolean state
 export const toggleFavoriteBtn = (arr: Array<CardType>, data: CardType, bool: boolean ) => {
    const favoriteCheck = arr.map((el: CardType) =>
      el.id === data.id ? Object.assign({}, el, {  like: bool }) : el )

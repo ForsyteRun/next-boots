@@ -11,6 +11,7 @@ export type ContextType = {
    loading: boolean
    disBtn: boolean
    totalCards: number
+   limitPageInWindow: number
    setTotalCards: (el: number) => void
    setItemPagi: (arr:  Array<CardType>) => void 
    setItem: (arr:  Array<CardType>) => void
@@ -34,6 +35,7 @@ export const contextDefaultValues: ContextType = {
    disBtn: false,
    itemPagi: [],
    totalCards: 0,
+   limitPageInWindow: 4,
    setTotalCards: () => {},
    setItemPagi: () => {},
    setItem: () => {},

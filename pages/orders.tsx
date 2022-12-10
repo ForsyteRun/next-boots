@@ -26,8 +26,7 @@ const Orders = () => {
       ? //подъём массива в массиве на уровень вверх
         <Stack direction="row" flexWrap="wrap" gap="20px">
           {addedOrder.map((el:OrderType) => el.content).flat().map((obj: CardType) => 
-            <CardItem card={obj} key={obj.id} disBtn={true} />)
-          }
+            <CardItem card={obj} key={obj.id} disBtn={true} />)}
         </Stack>
       : <EmptyDrawer
           btnBack

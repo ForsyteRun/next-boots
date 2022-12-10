@@ -16,11 +16,10 @@ import s from "./../styles/App.module.scss";
 //todo: симбиоз с MuiTheme не осуществлен, брейкпоинты. Какой лучше шрифт: Mui or Next.js. Responsive font
 //todo: 'жирный' useContext. Не лучше ли подключить Redux.
 //todo: React.Memo
-//todo: два раза нажимать для смены toogleDrawItem и setFavoriteItem
-//todo: при добавлении заказа в компоненте Orders, если элементов больше одного, то они криво отображаются
 //todo: не много ли useState?
 //todo: ворнинг на experimental feature (fontLoaders) in next.config.js.
-//todo: съезжает высота контейнера при добавлении товаров и при правке на странице favorites лезет вверх
+//todo: номерация заказов на странице Orders
+//todo: нужно ли Promise.All???
 
 const inter = Inter({ subsets: ["latin"] });
 declare module "@mui/material/styles" {

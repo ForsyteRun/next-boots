@@ -6,17 +6,17 @@ import { CardType } from "../types/types";
 import {Context, ContextType} from "./AppContext";
 import Sceleton from "./Sceleton";
 import Pagination from '@mui/material/Pagination';
+import { instansMockaAPI } from "../common/instansFetch";
 
 const Main =  () => {
   const [page, setPage] = useState<number>(1)
   const [searchValue, setSearchValue] = useState<InitialType>({search: ''})
-  const {sceleton, itemPagi, setItemPagi, totalCards} = useContext<ContextType>(Context)
-  const limitPageInWindow = 2
+  const {sceleton, itemPagi, setItemPagi, totalCards, limitPageInWindow} = useContext<ContextType>(Context)
   
   useEffect(() => {
     //get total count cards
     const changePage = async () => {
-    const resTotalCards = await fetch(`https://630f1ba6498924524a860c3f.mockapi.io/users?page=${page}&limit=${limitPageInWindow}`)
+    const resTotalCards = await fetch(instansMockaAPI + `users?page=${page}&limit=${limitPageInWindow}`)
     const data: Array<CardType> = await resTotalCards.json()
     setItemPagi(data)
    }
@@ -41,7 +41,7 @@ const Main =  () => {
           : itemPagi.filter((el:CardType) => el.title.toLowerCase().includes(searchValue.search.toLowerCase())).map((card: CardType) => <CardItem card={card} key={card.id} />)
           }
         </Stack>
-        <Pagination count={totalCards} page={page} onChange={handleChange} size="large" sx={{m: '20px auto 0 auto'}}/> 
+        <Pagination count={totalCards/limitPageInWindow} page={page} onChange={handleChange} size="large" sx={{m: '20px auto 0 auto'}}/> 
       </Stack>
   
     </>

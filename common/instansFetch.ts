@@ -1,0 +1,1 @@
+export const instansMockaAPI = 'https://630f1ba6498924524a860c3f.mockapi.io/';
