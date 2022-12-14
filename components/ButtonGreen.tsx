@@ -9,12 +9,12 @@ const ButtonGreen = () => {
   
   return (
     <>
-      <Button onClick={()=>finishOrders()} className={s.btn} disabled={disBtn}>
+      <button onClick={()=>finishOrders()} className={s.btn} disabled={disBtn}>
         <Stack direction='row' justifyContent='center'>
           <span style={{alignSelf: 'center'}}>Оформить заказ</span>
           <ArrowRightAltIcon className={s.arrow}/>
         </Stack>
-      </Button>
+      </button>
     </>
   );
 };
