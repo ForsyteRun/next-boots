@@ -22,7 +22,7 @@ import s from "./../styles/App.module.scss";
 //todo: номерация заказов на странице Orders
 //todo: нужно ли Promise.All???
 //todo: перевести на FireBase
-//todo: Layout в Index.tsx и сделать SSR
+//todo: Layout в Index.tsx  или где? сделать SSR
  
 const inter = Inter({ subsets: ["latin"] });
 declare module "@mui/material/styles" {
